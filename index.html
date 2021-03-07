@@ -1845,11 +1845,16 @@ Or -&gt; high level parts of the system should not depend on low level part of t
     }
 }
 </span></div></code></pre>
+<ul>
+<li>Now using the Builder to construct the HTML</li>
+</ul>
 <pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HtmlElement</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name, Text;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">HtmlElement</span>&gt; Elements</span> = <span class="hljs-keyword">new</span> List&lt;HtmlElement&gt;();
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> indentSize = <span class="hljs-number">2</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HtmlElement</span>(<span class="hljs-params"></span>)</span> {}
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HtmlElement</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name, <span class="hljs-keyword">string</span> text</span>)</span>
     {
@@ -2319,7 +2324,50 @@ However we could generalize the Builder class in order to reuse the code.</p>
 <li>
 <p>Factory is a component responsible solely for the wholesale (not piecewise) creation of objects.</p>
 </li>
+<li>
+<p>Example of that can go wrong when not using Factories</p>
+</li>
 </ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> CoordinateSystem{
+    Cartesian, Polar
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x, y;
+    
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> a, <span class="hljs-keyword">double</span> b, CoordinateSystem system = CoordinateSytem.Cartesian</span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (system)
+        {
+            <span class="hljs-keyword">case</span> CoordinateSystem.Cartesian:
+                x = a;
+                y = b;
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> CoordinateSystem.Polar:
+                x = a * Math.cos(b);
+                y = a * Math.sin(b);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfrangeException();
+        }
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
+    }
+
+    <span class="hljs-comment">// You cannot have two contructors with the same signature</span>
+    <span class="hljs-comment">// Even though it does make sense to create the points through theta and rho,</span>
+    <span class="hljs-comment">// And thus if you need this constructor to exist somehow you could do what</span>
+    <span class="hljs-comment">// Is being done above, however it creates many different problems</span>
+    <span class="hljs-comment">// Such as a and b being very generic and hard to know what it represents</span>
+    <span class="hljs-comment">// And if you create a XML file it could happen that the person using it does not read it</span>
+    <span class="hljs-comment">// And it would still be not easy to read the code</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"> <span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>{
+        <span class="hljs-comment">// Some implementations</span>
+    }
+}
+</div></code></pre>
 <h2 id="singleton"><a href="https://refactoring.guru/design-patterns/singleton">Singleton</a></h2>
 <img alt="Singleton Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/singleton/singleton-2x.png"/>
 <h1 id="structural-patterns">Structural Patterns</h1>
