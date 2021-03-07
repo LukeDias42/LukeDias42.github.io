@@ -4,6 +4,10 @@
         <meta charset="UTF-8">
         <title>C&num; and &period;NET study</title>
         <style>
+/* From extension zhuangtongfa.material-theme */
+
+
+
 </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
@@ -183,7 +187,20 @@
 <li><a href="#code-smells">Code Smells</a>
 <ul>
 <li><a href="#bloaters">Bloaters</a></li>
-<li><a href="#long-methods">Long Methods</a></li>
+<li><a href="#long-methods">Long Methods</a>
+<ul>
+<li><a href="#recipe-1">Recipe #1</a></li>
+<li><a href="#recipe-2">Recipe #2</a></li>
+<li><a href="#recipe-3">Recipe #3</a></li>
+<li><a href="#recipe-4">Recipe 4</a></li>
+<li><a href="#payoff">Payoff</a></li>
+</ul>
+</li>
+<li><a href="#large-class">Large Class</a>
+<ul>
+<li><a href="#recipe-1-1">Recipe 1</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2361,10 +2378,25 @@ However we could generalize the Builder class in order to reuse the code.</p>
     <span class="hljs-comment">// And thus if you need this constructor to exist somehow you could do what</span>
     <span class="hljs-comment">// Is being done above, however it creates many different problems</span>
     <span class="hljs-comment">// Such as a and b being very generic and hard to know what it represents</span>
-    <span class="hljs-comment">// And if you create a XML file it could happen that the person using it does not read it</span>
+    <span class="hljs-comment">// And if you create a XML comment it could happen that the person using it does not read it</span>
     <span class="hljs-comment">// And it would still be not easy to read the code</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"> <span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>{
         <span class="hljs-comment">// Some implementations</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>Now using Façade to avoid those problems</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x, y;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
     }
 }
 </div></code></pre>
@@ -2410,6 +2442,9 @@ However we could generalize the Builder class in order to reuse the code.</p>
 <img alt="Visitor Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/visitor/visitor-2x.png"/>
 <h1 id="refactoring">Refactoring</h1>
 <h2 id="code-smells">Code Smells</h2>
+<p>Code smelss are key signs that refactoring is necessary. In the process of refactoring, we get rid of s,ells, enabling further development of the application with equal or greater speed.
+The lack of regular refactoring can lead to a complete paralysis of a project over time, wastng a few years of development and requiring you to spend several more years to reqrite it from scratch.
+Therefore, it is necessary to get rid of code smelss while they are still small.</p>
 <h3 id="bloaters">Bloaters</h3>
 <p>Bloaters are code, methods and classes that have increased to such gargantuan proportions that they are hard to work with.
 Usually these semlls do not crop up right away, rather they accumulate over time as the program evolves (and specially when nobody makesan effort to eradicate them).</p>
@@ -2419,11 +2454,327 @@ Usually these semlls do not crop up right away, rather they accumulate over time
 <li>Reasons for the problem
 <ul>
 <li>When things are being added, but nothing is ever taken out. Since it's easier to write code than to read it, this &quot;smell&quot; remains unnoticed until the method turns into an ugly, oversized beast.</li>
-<li></li>
+<li>Mentally, it's often harder to create a new method than to add to an existing one: &quot;But it's just two lines, there's no use in creating a while method just for that...&quot; Which means that another line is added and then yet another, giving birth  to a tangle of spaghetti code</li>
 </ul>
 </li>
-<li></li>
+<li>Treatment
+<ul>
+<li>As a rule of thumb, if you feel the need to comment on something inside a method, you should take this code and put it in a new method. Even a single line can and should be split off into a separate method, if it requires explanations. And if the method has a descriptive name, nobody will need to look at the code to see what it does.</li>
 </ul>
+</li>
+</ul>
+<h4 id="recipe-1">Recipe #1</h4>
+<p>To reduce the length of a body, use Extract Method</p>
+<ul>
+<li>Problem
+<ul>
+<li>You have a code fragment that can be grouped together.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Move this code to are separate new method and replace the old code with a call to the method</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintOwing</span>(<span class="hljs-params"></span>)</span>
+{
+    PrintBanner();
+
+    <span class="hljs-comment">// Print Details</span>
+    Console.WriteLine(<span class="hljs-string">&quot;name: &quot;</span> + name);
+    Console.WriteLine(<span class="hljs-string">&quot;amount: &quot;</span> + Outstanding;
+}
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintOwing</span>(<span class="hljs-params"></span>)</span>
+{
+    PrintBanner();
+    PrintDetails(Outstanding);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintDetails</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> outstanding</span>)</span>
+{
+    Console.WriteLine(<span class="hljs-string">&quot;name: &quot;</span> + name);
+    Console.WriteLine(<span class="hljs-string">&quot;amount: &quot;</span> + outstanding);
+}
+</div></code></pre>
+<h4 id="recipe-2">Recipe #2</h4>
+<p>Reduce Local Variables and Parameters Before Extracting a Method
+If local variables and parameters interfere with extracting a method, use Replace Temp with Query, Introduce Parameter Object or Preserve Whole Object.</p>
+<ul>
+<li>Replace Temp with Query
+<ul>
+<li>Problem
+<ul>
+<li>You place the result of an expression in a local variable for later use in your code</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Move the entire Expression to a separate method and return the result from it. Query the method instead of using a variable.</li>
+<li>Incorporate the new method in other methods, if necessary;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">CalculateTotal</span>(<span class="hljs-params"></span>)</span>
+{
+    <span class="hljs-keyword">double</span> basePrice = quantity * itemPrice;
+
+    <span class="hljs-keyword">if</span> (basePrice &gt; <span class="hljs-number">1000</span>)
+        <span class="hljs-keyword">return</span> basePrice * <span class="hljs-number">0.95</span>;
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> basePrice * <span class="hljs-number">0.98</span>;
+}
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">CalculateTotal</span>(<span class="hljs-params"></span>)</span>
+{
+    <span class="hljs-keyword">if</span> (BasePrice() &gt; <span class="hljs-number">1000</span>)
+        BasePrice() * <span class="hljs-number">0.95</span>;
+    <span class="hljs-keyword">else</span>
+        BasePrice() * <span class="hljs-number">0.98</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">BasePrice</span>(<span class="hljs-params"></span>)</span> 
+    =&gt; quantity * itemPrice;
+</div></code></pre>
+<ul>
+<li>Introduce Parameter Object
+<ul>
+<li>Problem
+<ul>
+<li>Your methods contain a repeating group of parameters</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Replace these parameters with an object</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+AmountInvoicedIn(DateTime start, DateTime end);
+AmountReceivedIn(DateTime start, DateTime end);
+AmountOverdueIn(DateTime start, DateTime end);
+
+<span class="hljs-comment">// Solution</span>
+AmountInvoicedIn(DateRange range);
+AmountReceivedIn(DateRange range);
+AmountOverdueIn(DateRange range);
+</div></code></pre>
+<ul>
+<li>Preserve Whole Object
+<ul>
+<li>Problem
+<ul>
+<li>You get several values from an object and then pass them as parameters to a method</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Instead, try passing the whole object</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">int</span> low = dasTempRange.Low;
+<span class="hljs-keyword">int</span> high = daysTempRange.High;
+<span class="hljs-keyword">bool</span> withinPlan = plan.WithinRange(low, high);
+
+<span class="hljs-comment">// Solution</span>
+boolean withinPlan = plan.WithinRange(daysTempRange);
+</div></code></pre>
+<h4 id="recipe-3">Recipe #3</h4>
+<p>Replace Method with Method Object
+If none of the previous recipes help, try moving the entire method to a separate object via Replace Method with Method Object.</p>
+<ul>
+<li>Problem
+<ul>
+<li>You have a long method in which the local variables are so interwined that you can't apply Extract Method</li>
+</ul>
+</li>
+<li>Transform the method into a separate class so that the local variables become fields of the class. Then you can split the method into several methods within the same calss.</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Order</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Price</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">double</span> primaryBasePrice;
+        <span class="hljs-keyword">double</span> secondaryBasePrice;
+        <span class="hljs-keyword">double</span> tertiaryBasePrice;
+        <span class="hljs-comment">// Perform long computation</span>
+    }
+}
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Order</span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Price</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> PriceCalculator(<span class="hljs-keyword">this</span>).Compute();
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">PriceCalculator</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> primaryBasePrice;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> secondaryBasePrice;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> tertiaryBasePrice;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PriceCalculator</span>(<span class="hljs-params">Order order</span>)</span>
+    {
+        <span class="hljs-comment">// Copy relevant information from the order object </span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Compute</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Perform long computation</span>
+    }
+}
+</div></code></pre>
+<h4 id="recipe-4">Recipe 4#</h4>
+<p>Conditionals and Loops
+Conditionals operators and loops are a good clue that code can be moved to a separate method. For conditionals, use Decompose Conditionals. If loops are in the way, try Extract Method.</p>
+<ul>
+<li>Conditionals
+<ul>
+<li>Problem
+<ul>
+<li>You have a complex conditional</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Decompose the complicated parts of the conditional into separate methods: the condiction, else if and else;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">if</span> (date.Before(SUMMER_START) || date.After(SUMMER_END))
+    charge = quantity * winterRate * winterServiceCharge;
+<span class="hljs-keyword">else</span>
+    charge = quantity * summerRate;
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-keyword">if</span> (isSummer(date))
+    charge = SummerCharge(quantity);
+<span class="hljs-keyword">else</span>
+    charge = WinterCharge(quanity);
+</div></code></pre>
+<ul>
+<li>Loops
+<ul>
+<li>Problem
+<ul>
+<li>You have a code fragment that can be grouped together</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Move this code to a separate new method (or function) and replace the old code with a call to the method</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintProperties</span>(<span class="hljs-params">List&lt;User&gt; users</span>)</span>
+{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; users.Length; i++)
+    {
+        <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> StringBuilder();
+        result.Append(users[i].Name())
+                 .Append(<span class="hljs-string">&quot; &quot;</span>)
+                 .AppendLine(users[i].Age());
+        Console.WriteLine(result);
+    }
+}
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintProperties</span>(<span class="hljs-params">List&lt;User&gt; users</span>)</span>
+{
+    <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> user <span class="hljs-keyword">in</span> user)
+        Console.WriteLine(GetProperties(user))/
+}
+
+<span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">GetProperties</span>(<span class="hljs-params">User use</span>)</span>
+{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{user.Name}</span> - <span class="hljs-subst">{user.Age}</span>&quot;</span>;
+}
+</div></code></pre>
+<h4 id="payoff">Payoff</h4>
+<p>Among all types of object-oriented code, classes with short methods live longest. The longer a method or function is, the harder it becomes to understand and maintain it.
+In addition, long methods offer the perfect hiding place of unwanted duplicate code.</p>
+<ul>
+<li>Performace
+<ul>
+<li>Does an increase in numver of methods hurt performance, as many people clain? In almost all cases the impact is so negligible that it's not even worth worrying about.</li>
+<li>Plus, now that you have clear and understandable code, you're more likely to find truly effective methods for restructuring code and getting real performance gains if the need ever arises.</li>
+</ul>
+</li>
+</ul>
+<h3 id="large-class">Large Class</h3>
+<p>A class that contains many fields/methods/lines of code.</p>
+<ul>
+<li>Reason for the Problem
+<ul>
+<li>Classes usually start small. But over time, they get bloated as the program grows.</li>
+<li>As is the case with long methods as well, programmers usually find it mentally less taxing to place a new feature in an existing class than to create a new class for the feature... (it happens all the time, lol).</li>
+</ul>
+</li>
+<li>Treatment
+<ul>
+<li>When a class is wearing too many (functional) gats, think about splitting it up.</li>
+</ul>
+</li>
+</ul>
+<h4 id="recipe-1-1">Recipe 1#</h4>
+<p>Extract Class
+Extract Class helps if part of the behavior of the large class can be spun off into a separate component.</p>
+<ul>
+<li>Problem
+<ul>
+<li>When one class does the work of two, awkwardness results.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Instead, create a new class and place the fields and methods responsible for the relevant functionality in it.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeAreaCode;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeNumber;
+}
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
+    <span class="hljs-keyword">public</span> TelephoneNumber telephone;
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">TelephoneNumber</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeAreaCode;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeNumber;
+}
+</div></code></pre>
 <h1 id="multithreading">Multithreading</h1>
 <h2 id="asynchrony">Asynchrony</h2>
 <p>Asynchrony refers to the occurece of events independent of the main program flow and ways to deal with such events.</p>
