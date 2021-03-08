@@ -101,7 +101,12 @@
 <li><a href="#async--await">Async / Await</a></li>
 </ul>
 </li>
-<li><a href="#big-o">Big O</a></li>
+<li><a href="#big-o">Big O</a>
+<ul>
+<li><a href="#o1">O(1)</a></li>
+<li><a href="#ologn">O(log(n))</a></li>
+</ul>
+</li>
 <li><a href="#data-structures">Data Structures</a>
 <ul>
 <li><a href="#arrays">Arrays</a></li>
@@ -162,7 +167,12 @@
 <li><a href="#composite">Composite</a></li>
 <li><a href="#decorator">Decorator</a></li>
 <li><a href="#fa%C3%A7ade">Façade</a></li>
-<li><a href="#flyweight">Flyweight</a></li>
+<li><a href="#flyweight">Flyweight</a>
+<ul>
+<li><a href="#repeating-user-names-example">Repeating User Names Example</a></li>
+<li><a href="#text-formatting-example">Text Formatting Example</a></li>
+</ul>
+</li>
 <li><a href="#proxy">Proxy</a></li>
 </ul>
 </li>
@@ -1251,6 +1261,56 @@ It is very rare to create Extension Methods, it is more likely that you will hav
 </li>
 </ul>
 <h1 id="big-o">Big O</h1>
+<ul>
+<li>
+<p>Big O is a mathematical notation that describes the limiting behavior of a funcion when arguments tend towards a particular value or infinity. Big O is also known as asymptotic notation.</p>
+</li>
+<li>
+<p>In Computer Science, big O notation is used to classify algorithms according to how their run time or space requirements grow as the input size grows.</p>
+</li>
+<li>
+<p>Big O notation characterizes functions according to their growth rates: Different functions with the same growth rate may be represented with the same O notation.</p>
+</li>
+<li>
+<p>Big O specifically describes the <strong>Worst Case</strong> scenario.</p>
+</li>
+<li>
+<p>Having a Big O that scales slowly is very important, because it means your code is very scalable.</p>
+<ul>
+<li>Scalable means that your system can grow to process much more data without such a huge increase in cost.</li>
+</ul>
+</li>
+</ul>
+<h2 id="o1">O(1)</h2>
+<img alt="O(1)" height="240px" src="https://latex.codecogs.com/svg.latex?O(1)"/>
+This is the most simple example, and the fastest algorithm possible.
+It occurs when no loop occurs, meaning that the code is going to be executed only once.
+Many things are O(1), here are some examples:
+- Operations (+, -, *, /)
+- Comparisons (<, >, ==)
+- Function call
+<pre><code class="language-C#"><div><span class="hljs-comment">// Example of O(1)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReallyFast</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-keyword">static</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// This if is O(1) and calling the method is too</span>
+        <span class="hljs-keyword">if</span> (Greater())
+        {
+            <span class="hljs-comment">//  Calling Console.WriteLine() is considered O(1)</span>
+            Console.WriteLine(<span class="hljs-string">&quot;a is greater&quot;</span>);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Greater</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b</span>)</span>
+    {
+        <span class="hljs-comment">// This comparison is O(1)</span>
+        <span class="hljs-keyword">return</span> a &gt; b;
+    }
+}
+</div></code></pre>
+<h2 id="ologn">O(log(n))</h2>
+<img alt="O(1)" height="240px" src="https://latex.codecogs.com/svg.latex?O(log%20(N))"/>
 <h1 id="data-structures">Data Structures</h1>
 <h2 id="arrays">Arrays</h2>
 <h2 id="hash-tables">Hash Tables</h2>
@@ -2420,6 +2480,137 @@ However we could generalize the Builder class in order to reuse the code.</p>
 <img alt="Façade Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/facade/facade-2x.png"/>
 <h2 id="flyweight"><a href="https://refactoring.guru/design-patterns/flyweight">Flyweight</a></h2>
 <img alt="Flyweight Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/flyweight/flyweight-2x.png"/>
+<p>Flyweight Design Patterns was created to accomplish a simple goal: Space Optimization. And it does that by storing externally the data associated with similar objects.</p>
+<ul>
+<li>Motivations
+<ul>
+<li>Avoid redundancy when storing data</li>
+<li>Eg., MMORPG
+<ul>
+<li>Plenty of users with identical first/last names</li>
+<li>No sense in storing same first/last name over and over again</li>
+<li>Store a list of names and pointers to them</li>
+</ul>
+</li>
+<li>.NET performs string interning, so an identical string is stored only once.</li>
+<li>E.g. bold or italic text in the console
+<ul>
+<li>Dont want each character to have a formatting character</li>
+<li>Operate on ranges (e.g. line number, start/end position)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="repeating-user-names-example">Repeating User Names Example</h3>
+<p>Use JetBrains.DotMemoryUnit to see the memory allocation of the program</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">User</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> _fullName;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> fullName</span>)</span>
+    {
+        _fullName = fullName;
+    }
+}
+
+[<span class="hljs-meta">TestFixture</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+
+    <span class="hljs-comment">// By doing the test this way, each string is recreated even if there are equal strings in the code, which takes</span>
+    <span class="hljs-comment">//  a lot more space the more Users you add, so you should have a system to reference a string that is equal</span>
+    <span class="hljs-comment">//  to itself in case there&#x27;s an equal one </span>
+    [<span class="hljs-meta">Test</span>]
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TestUser</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> firstNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString());
+        <span class="hljs-keyword">var</span> lastNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString()); 
+        
+        <span class="hljs-keyword">var</span> users = <span class="hljs-keyword">new</span> List&lt;User&gt;();
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> firstName <span class="hljs-keyword">in</span> firstName)
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> lasName <span class="hljs-keyword">in</span> lastNames)
+                users.Add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">$&quot;<span class="hljs-subst">{firstName}</span> <span class="hljs-subst">{lastName}</span>&quot;</span>));
+
+        ForceGC();
+
+        dorMemory.Check(memory =&gt;
+         {
+             Console.WriteLine(memory.SizeInBytes);
+         });
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ForceGC</span>(<span class="hljs-params"></span>)</span>
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> <span class="hljs-title">RandomString</span>(<span class="hljs-params"></span>)</span>
+    {
+        Random rand = <span class="hljs-keyword">new</span> Random();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>(
+            Enumerable.Range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)
+            .Select(i =&gt; (<span class="hljs-keyword">char</span>) (<span class="hljs-string">&#x27;a&#x27;</span> + rand.Next(<span class="hljs-number">26</span>)))
+            .ToArray());
+    }
+}
+
+<span class="hljs-comment">// Doing the more optimized way</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">User2</span>
+{
+    <span class="hljs-keyword">static</span> List&lt;<span class="hljs-keyword">string</span>&gt; strings = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;)();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] names;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User2</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> fullName</span>)</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getOrAdd</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> s</span>)</span>
+        {
+            <span class="hljs-keyword">int</span> idx = <span class="hljs-keyword">string</span>.IndexOf(s);
+            <span class="hljs-keyword">if</span> (idx != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> idx;
+            <span class="hljs-keyword">else</span>
+            {
+                strings.Add(s);
+                <span class="hljs-keyword">return</span> strings.Count - <span class="hljs-number">1</span>;
+            }   
+        }
+        names = fullName.Split(<span class="hljs-string">&#x27; &#x27;</span>).Select(getOrAdd).ToArray();
+    }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> FullName =&gt; <span class="hljs-keyword">string</span>.Join(<span class="hljs-string">&quot; &quot;</span>, names.Select(i =&gt; strings[i]));
+}
+
+[<span class="hljs-meta">TestFixture</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program2</span>
+{
+    [<span class="hljs-meta">Test</span>]
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TestUser</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> firstNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString());
+        <span class="hljs-keyword">var</span> lastNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString()); 
+        
+        <span class="hljs-keyword">var</span> users = <span class="hljs-keyword">new</span> List&lt;User&gt;();
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> firstName <span class="hljs-keyword">in</span> firstName)
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> lasName <span class="hljs-keyword">in</span> lastNames)
+                users.Add(<span class="hljs-keyword">new</span> User2(<span class="hljs-string">$&quot;<span class="hljs-subst">{firstName}</span> <span class="hljs-subst">{lastName}</span>&quot;</span>));
+
+        ForceGC();
+
+        dorMemory.Check(memory =&gt;
+         {
+             Console.WriteLine(memory.SizeInBytes);
+         });
+    }
+}
+
+</div></code></pre>
+<h3 id="text-formatting-example">Text Formatting Example</h3>
 <h2 id="proxy"><a href="https://refactoring.guru/design-patterns/proxy">Proxy</a></h2>
 <img alt="Builder Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/proxy/proxy-2x.png"/>
 <h1 id="behavioral-patterns">Behavioral Patterns</h1>
@@ -2659,195 +2850,4 @@ Conditionals operators and loops are a good clue that code can be moved to a sep
 </li>
 <li>Solution
 <ul>
-<li>Decompose the complicated parts of the conditional into separate methods: the condiction, else if and else;</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
-<span class="hljs-keyword">if</span> (date.Before(SUMMER_START) || date.After(SUMMER_END))
-    charge = quantity * winterRate * winterServiceCharge;
-<span class="hljs-keyword">else</span>
-    charge = quantity * summerRate;
-
-<span class="hljs-comment">// Solution</span>
-<span class="hljs-keyword">if</span> (isSummer(date))
-    charge = SummerCharge(quantity);
-<span class="hljs-keyword">else</span>
-    charge = WinterCharge(quanity);
-</div></code></pre>
-<ul>
-<li>Loops
-<ul>
-<li>Problem
-<ul>
-<li>You have a code fragment that can be grouped together</li>
-</ul>
-</li>
-<li>Solution
-<ul>
-<li>Move this code to a separate new method (or function) and replace the old code with a call to the method</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintProperties</span>(<span class="hljs-params">List&lt;User&gt; users</span>)</span>
-{
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; users.Length; i++)
-    {
-        <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> StringBuilder();
-        result.Append(users[i].Name())
-                 .Append(<span class="hljs-string">&quot; &quot;</span>)
-                 .AppendLine(users[i].Age());
-        Console.WriteLine(result);
-    }
-}
-
-<span class="hljs-comment">// Solution</span>
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintProperties</span>(<span class="hljs-params">List&lt;User&gt; users</span>)</span>
-{
-    <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> user <span class="hljs-keyword">in</span> user)
-        Console.WriteLine(GetProperties(user))/
-}
-
-<span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">GetProperties</span>(<span class="hljs-params">User use</span>)</span>
-{
-    <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{user.Name}</span> - <span class="hljs-subst">{user.Age}</span>&quot;</span>;
-}
-</div></code></pre>
-<h4 id="payoff">Payoff</h4>
-<p>Among all types of object-oriented code, classes with short methods live longest. The longer a method or function is, the harder it becomes to understand and maintain it.
-In addition, long methods offer the perfect hiding place of unwanted duplicate code.</p>
-<ul>
-<li>Performace
-<ul>
-<li>Does an increase in numver of methods hurt performance, as many people clain? In almost all cases the impact is so negligible that it's not even worth worrying about.</li>
-<li>Plus, now that you have clear and understandable code, you're more likely to find truly effective methods for restructuring code and getting real performance gains if the need ever arises.</li>
-</ul>
-</li>
-</ul>
-<h3 id="large-class">Large Class</h3>
-<p>A class that contains many fields/methods/lines of code.</p>
-<ul>
-<li>Reason for the Problem
-<ul>
-<li>Classes usually start small. But over time, they get bloated as the program grows.</li>
-<li>As is the case with long methods as well, programmers usually find it mentally less taxing to place a new feature in an existing class than to create a new class for the feature... (it happens all the time, lol).</li>
-</ul>
-</li>
-<li>Treatment
-<ul>
-<li>When a class is wearing too many (functional) gats, think about splitting it up.</li>
-</ul>
-</li>
-</ul>
-<h4 id="recipe-1-1">Recipe 1#</h4>
-<p>Extract Class
-Extract Class helps if part of the behavior of the large class can be spun off into a separate component.</p>
-<ul>
-<li>Problem
-<ul>
-<li>When one class does the work of two, awkwardness results.</li>
-</ul>
-</li>
-<li>Solution
-<ul>
-<li>Instead, create a new class and place the fields and methods responsible for the relevant functionality in it.</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
-{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeAreaCode;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeNumber;
-}
-
-<span class="hljs-comment">// Solution</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
-{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
-    <span class="hljs-keyword">public</span> TelephoneNumber telephone;
-}
-
-<span class="hljs-keyword">class</span> <span class="hljs-title">TelephoneNumber</span>
-{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeAreaCode;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeNumber;
-}
-</div></code></pre>
-<h4 id="recipe-2-1">Recipe #2</h4>
-<p>Extract Subclass
-Extract Subclass helps if part of the behavior of the large class can be implemented in different ways or is used in rare cases.</p>
-<ul>
-<li>Problem
-<ul>
-<li>A class has features that are used only in certain cases</li>
-</ul>
-</li>
-</ul>
-<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Subclass%20-%20Before.png"/>
-<ul>
-<li>Solution
-<ul>
-<li>Create a subclass and use it in these cases</li>
-</ul>
-</li>
-</ul>
-<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Subclass%20-%20After.png"/>
-<h4 id="recipe-3-1">Recipe #3</h4>
-<p>Extract Interface
-Extract Interface helps if it's necessary to have a list of the operations and behaviors that the client can use.</p>
-<ul>
-<li>Problem
-<ul>
-<li>Multiple clients are using the same part of a class interface.</li>
-<li>Another case: part of the interface int two classes are the same</li>
-</ul>
-</li>
-</ul>
-<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Interface%20-%20Before.png"/>
-<ul>
-<li>Solution
-<ul>
-<li>Move this identical portion to its own interface</li>
-</ul>
-</li>
-</ul>
-<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Interface%20-%20After.png"/>
-<h4 id="recipe-4-1">Recipe 4#</h4>
-<p>Separate GUI and Domain Data
-If a large class is responsible for the graphical interface. you may try to move some of its data and behavior to a separate domain object. In doing so, it may be necessary to store copies of some data in two places and keep the data consistent. Duplicate Observed Data offers a way to do this.</p>
-<ul>
-<li>Problem
-<ul>
-<li>Is domain data stored in classes responsible for the GUI.</li>
-</ul>
-</li>
-</ul>
-<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/refactoring/diagrams/Duplicate%20Observed%20Data%20-%20Before.png"/>
-<ul>
-<li>Solution
-<ul>
-<li>Then it's a good idea to separate the data into separate classes, ensuring connection and synchronyzation between the domain class and the GUI.</li>
-</ul>
-</li>
-</ul>
-<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/refactoring/diagrams/Duplicate%20Observed%20Data%20-%20After.png"/>
-<h4 id="payoff-1">Payoff</h4>
-<ul>
-<li>Refactoring these classes spares developers from needing to remember a large number of attributes of a class.</li>
-<li>In many cases, splitting Large classes into parts avoid duplication of code functionality</li>
-</ul>
-<h3 id="primitive-obsession">Primitive Obsession</h3>
-<h1 id="multithreading">Multithreading</h1>
-<h2 id="asynchrony">Asynchrony</h2>
-<p>Asynchrony refers to the occurece of events independent of the main program flow and ways to deal with such events.</p>
-<h2 id="thread">Thread</h2>
-<p>A thread of execution is the samllest sequence of programmed instructions that can be managed independently by a scheduler, which is typically a part of the operating system.</p>
-<p>A thread is a component of a process. Multiple threads can exist within one process, executing concurrently and sharing resources such as memory.</p>
-<ul>
+<li>
