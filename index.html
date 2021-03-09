@@ -2,7 +2,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>C&num; and &period;NET study</title>
+        <title>Programming Study File</title>
         <style>
 /* From extension zhuangtongfa.material-theme */
 
@@ -28,10 +28,10 @@
         
     </head>
     <body class="vscode-body vscode-light">
-        <h1 id="c-and-net-study">C# and .NET study</h1>
+        <h1 id="programming-study-file">Programming Study File</h1>
 <ul>
-<li><a href="#c-and-net-study">C# and .NET study</a></li>
-<li><a href="#basic-for-beginners">Basic (For beginners)</a>
+<li><a href="#programming-study-file">Programming Study File</a></li>
+<li><a href="#c---basic">C# - Basic</a>
 <ul>
 <li><a href="#c-history">C# History</a></li>
 <li><a href="#primitive-types-and-expressions">Primitive Types and Expressions</a></li>
@@ -43,7 +43,7 @@
 <li><a href="#working-with-files">Working with Files</a></li>
 </ul>
 </li>
-<li><a href="#intermediary-classes-interfaces-and-oop">Intermediary (Classes, interfaces and OOP)</a>
+<li><a href="#c---intermediary">C# - Intermediary</a>
 <ul>
 <li><a href="#object-oriented-programming">Object Oriented Programming</a></li>
 <li><a href="#classes">Classes</a>
@@ -76,7 +76,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#advanced">Advanced</a>
+<li><a href="#c---advanced">C# - Advanced</a>
 <ul>
 <li><a href="#generics">Generics</a>
 <ul>
@@ -104,7 +104,12 @@
 <li><a href="#big-o">Big O</a>
 <ul>
 <li><a href="#o1">O(1)</a></li>
-<li><a href="#ologn">O(log(n))</a></li>
+<li><a href="#ologn">O(log(N))</a></li>
+<li><a href="#n">()(N)</a></li>
+<li><a href="#olognn">O(log(N)*N)</a></li>
+<li><a href="#on">O(N²)</a></li>
+<li><a href="#o2n">O(2^N)</a></li>
+<li><a href="#on-1">O(N!)</a></li>
 </ul>
 </li>
 <li><a href="#data-structures">Data Structures</a>
@@ -156,7 +161,22 @@
 <li><a href="#faceted-builder">Faceted Builder</a></li>
 </ul>
 </li>
-<li><a href="#factories">Factories</a></li>
+<li><a href="#factories">Factories</a>
+<ul>
+<li><a href="#factory-method">Factory Method</a></li>
+<li><a href="#asynchronous-factory-method">Asynchronous Factory Method</a></li>
+<li><a href="#factory">Factory</a>
+<ul>
+<li><a href="#inner-factory">Inner Factory</a></li>
+</ul>
+</li>
+<li><a href="#abstract-factory">Abstract Factory</a>
+<ul>
+<li><a href="#abstract-factory-and-ocp">Abstract Factory and OCP</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#singleton">Singleton</a></li>
 </ul>
 </li>
@@ -185,8 +205,8 @@
 <li><a href="#mediator">Mediator</a></li>
 <li><a href="#memento">Memento</a></li>
 <li><a href="#null-object">Null Object</a></li>
-<li><a href="#observerhttpsrefactoringgurudesign-patternsobserver">Observer(https://refactoring.guru/design-patterns/observer)</a></li>
-<li><a href="#statehttpsrefactoringgurudesign-patternsstate">State(https://refactoring.guru/design-patterns/state)</a></li>
+<li><a href="#observer">Observer</a></li>
+<li><a href="#state">State</a></li>
 <li><a href="#strategy">Strategy</a></li>
 <li><a href="#template-method">Template Method</a></li>
 <li><a href="#visitor">Visitor</a></li>
@@ -215,7 +235,23 @@
 <li><a href="#payoff-1">Payoff</a></li>
 </ul>
 </li>
-<li><a href="#primitive-obsession">Primitive Obsession</a></li>
+<li><a href="#primitive-obsession">Primitive Obsession</a>
+<ul>
+<li><a href="#recipe-1-2">Recipe #1</a></li>
+<li><a href="#recipe-2-2">Recipe #2</a></li>
+<li><a href="#recipe-3-2">Recipe #3</a></li>
+<li><a href="#recipe-4-2">Recipe #4</a></li>
+<li><a href="#payoff-2">Payoff</a></li>
+</ul>
+</li>
+<li><a href="#long-parameters-list">Long Parameters List</a>
+<ul>
+<li><a href="#recipe-1-3">Recipe #1</a></li>
+<li><a href="#recipe-2-3">Recipe #2</a></li>
+<li><a href="#recipe-3-3">Recipe #3</a></li>
+<li><a href="#payoff-3">Payoff</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -240,7 +276,7 @@
 </li>
 <li><a href="#made-by">Made by</a></li>
 </ul>
-<h1 id="basic-for-beginners">Basic (For beginners)</h1>
+<h1 id="c---basic">C# - Basic</h1>
 <h2 id="c-history">C# History</h2>
 <h2 id="primitive-types-and-expressions">Primitive Types and Expressions</h2>
 <h2 id="non-primitive-and-expressions">Non-Primitive and Expressions</h2>
@@ -249,7 +285,7 @@
 <h2 id="working-with-dates">Working with Dates</h2>
 <h2 id="working-with-text">Working with Text</h2>
 <h2 id="working-with-files">Working with Files</h2>
-<h1 id="intermediary-classes-interfaces-and-oop">Intermediary (Classes, interfaces and OOP)</h1>
+<h1 id="c---intermediary">C# - Intermediary</h1>
 <h2 id="object-oriented-programming">Object Oriented Programming</h2>
 <ul>
 <li>Encapsulation / Information Hiding</li>
@@ -635,7 +671,7 @@ myClass.MyMethod(<span class="hljs-keyword">out</span> a);
 <pre><code class="language-C#"><div><span class="hljs-keyword">object</span> obj = <span class="hljs-number">10</span>;
 <span class="hljs-keyword">int</span> number = (<span class="hljs-keyword">int</span>)obj;
 </div></code></pre>
-<h1 id="advanced">Advanced</h1>
+<h1 id="c---advanced">C# - Advanced</h1>
 <h2 id="generics"><a href="https://docs.microsoft.com/dotnet/csharp/programming-guide/generics/">Generics</a></h2>
 <p>Generic classes are classes that have a T type which is defined upon instantiation.
 Custom Generic classes are very rare, you will more frequently use the Generic Data Structures that already comes with .NET.</p>
@@ -1104,8 +1140,6 @@ It is very rare to create Extension Methods, it is more likely that you will hav
                                                    <span class="hljs-keyword">where</span> b.Price &lt; <span class="hljs-number">10</span>
                                                    orderBy b.Title
                                                    <span class="hljs-keyword">select</span> b.Title;
-
-
     }
 }
 </div></code></pre>
@@ -1282,13 +1316,14 @@ It is very rare to create Extension Methods, it is more likely that you will hav
 </li>
 </ul>
 <h2 id="o1">O(1)</h2>
-<img alt="O(1)" height="240px" src="https://latex.codecogs.com/svg.latex?O(1)"/>
-This is the most simple example, and the fastest algorithm possible.
+<p>This is the most simple example, and the fastest algorithm possible.
 It occurs when no loop occurs, meaning that the code is going to be executed only once.
-Many things are O(1), here are some examples:
-- Operations (+, -, *, /)
-- Comparisons (<, >, ==)
-- Function call
+Many things are O(1), here are some examples:</p>
+<ul>
+<li>Operations (+, -, *, /)</li>
+<li>Comparisons (&lt;, &gt;, ==)</li>
+<li>Function call</li>
+</ul>
 <pre><code class="language-C#"><div><span class="hljs-comment">// Example of O(1)</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReallyFast</span>
 {
@@ -1309,8 +1344,13 @@ Many things are O(1), here are some examples:
     }
 }
 </div></code></pre>
-<h2 id="ologn">O(log(n))</h2>
-<img alt="O(1)" height="240px" src="https://latex.codecogs.com/svg.latex?O(log%20(N))"/>
+<h2 id="ologn">O(log(N))</h2>
+<p>This one is a bit more complex, and the</p>
+<h2 id="n">()(N)</h2>
+<h2 id="olognn">O(log(N)*N)</h2>
+<h2 id="on">O(N²)</h2>
+<h2 id="o2n">O(2^N)</h2>
+<h2 id="on-1">O(N!)</h2>
 <h1 id="data-structures">Data Structures</h1>
 <h2 id="arrays">Arrays</h2>
 <h2 id="hash-tables">Hash Tables</h2>
@@ -2406,9 +2446,11 @@ However we could generalize the Builder class in order to reuse the code.</p>
 <li>
 <p>Factory is a component responsible solely for the wholesale (not piecewise) creation of objects.</p>
 </li>
-<li>
-<p>Example of that can go wrong when not using Factories</p>
-</li>
+</ul>
+<h3 id="factory-method">Factory Method</h3>
+<p>Factory method is a method inside a class that returns a new object of the class own type, making it possible to create many ways of intantiating a class.</p>
+<ul>
+<li>Example of that can go wrong when not using Factories</li>
 </ul>
 <pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> CoordinateSystem{
     Cartesian, Polar
@@ -2451,20 +2493,163 @@ However we could generalize the Builder class in order to reuse the code.</p>
 }
 </div></code></pre>
 <ul>
-<li>Now using Façade to avoid those problems</li>
+<li>Now using Factory to avoid those problems</li>
 </ul>
-<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+<pre><code class="language-C#"><div><span class="hljs-comment">// There are two benefits in using Factory over Constructors</span>
+<span class="hljs-comment">// The first one is that you can have multiple ways of creating the object, with the same signature and different names</span>
+<span class="hljs-comment">// for the parameters.</span>
+<span class="hljs-comment">// The other one is that you can give whicever name you want to the method that is creating the object</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
 {
+    <span class="hljs-comment">// Factory Method Design Pattern</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewCartesianPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(x, y);
+    }
 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewPolarPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(rho * Math.cos(theta), rho * Math.sin(theta));
+    }
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x, y;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
     {
         <span class="hljs-keyword">this</span>.x = x;
         <span class="hljs-keyword">this</span>.y = y;
     }
 }
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> point = Point.NewPolarPoint(<span class="hljs-number">1.0</span>, Math.PI / <span class="hljs-number">2.0</span>);
+    }
+}
 </div></code></pre>
+<h3 id="asynchronous-factory-method">Asynchronous Factory Method</h3>
+<p>Asynchronous invocation cannot happen everywhere, it can happen on a method, however it cannot happen on a contructor;
+So a good way to create objects asynchronously is using the Factory Method.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">async</span> Task&lt;Foo&gt; <span class="hljs-title">InitAsync</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">await</span> Task.Delay(<span class="hljs-number">1000</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>; 
+    }
+
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Task&lt;Foo&gt; <span class="hljs-title">CreateAsync</span>(<span class="hljs-params"></span>)</span>
+     {
+         <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> Foo();
+         <span class="hljs-keyword">return</span> result.InitAsync();
+     }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        Foo x = <span class="hljs-keyword">await</span> Foo.CreateAsync();
+    }
+}
+</div></code></pre>
+<h3 id="factory">Factory</h3>
+<p>It can be argued that the construction of an object should be a separate responsability from what the object actually does.
+So if you're using the Factory Design Patterns, to follow the Single Responsability Problem, it would be important to have another class for the  Factory.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> X, Y;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y</span>)</span>
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+<span class="hljs-comment">// The problem of having this outside class for instantiating a Point object</span>
+<span class="hljs-comment">// is that you have to make the Point constructor public, which can be somewhat confusing</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PointFactory</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewPolarPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(rho * Math.cos(theta), rho * Math.sin(theta));
+    }
+}
+</div></code></pre>
+<h4 id="inner-factory">Inner Factory</h4>
+<p>The Inner Factory tries to solve</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x, y;
+    
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span>
+    {
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewCartesianPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(x, y);
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewPolarPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(rho * Math.cos(theta), rho * Math.sin(theta));
+        }
+    }
+}
+</div></code></pre>
+<h3 id="abstract-factory">Abstract Factory</h3>
+<p>The Abstract Factory Design Pattern is used to give out Abstract objects instead of concrete objects;</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IHotDrink</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Consume</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Tea</span> : <span class="hljs-title">IHotDrink</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Consume</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">&quot;This tea is so amazing, I really, really, really, really, really, love it!);
+    }
+}
+
+internal class Coffee : IHotDrink
+{
+    public void Consume()
+    {
+        Console.Write(&quot;</span>I hate <span class="hljs-keyword">this</span> coffee, it tastes like your ugly face <span class="hljs-keyword">in</span> a sad winter day<span class="hljs-string">&quot;);
+    }
+}
+
+internal interface IHotDrinkFactory
+{
+    public IHotDrink Prepare(int amount);
+}
+
+internal class TeaFactory : IHotDrinkFactory
+{
+    public IHotDrink Prepare(int amount)
+    {
+        Console.WriteLine($&quot;</span>Put <span class="hljs-keyword">in</span> a tea bag, boild water, pour {amount} ml, <span class="hljs-keyword">add</span> lemon, enjoy!<span class="hljs-string">&quot;);
+        return new Tea();
+    }
+}
+
+internal class CoffeeFactory : IHotDrinkFactory
+{
+    public IHotDrink Prepare(int amount)
+    {
+        Console.WriteLine($&quot;</span>Grind some BEANS, boil WATER, pour {amount} ml of BLOOD, <span class="hljs-keyword">add</span> HATE and FEAR. Your coffee <span class="hljs-keyword">is</span> ready.<span class="hljs-string">&quot;);
+    }
+}
+</span></div></code></pre>
+<h4 id="abstract-factory-and-ocp">Abstract Factory and OCP</h4>
 <h2 id="singleton"><a href="https://refactoring.guru/design-patterns/singleton">Singleton</a></h2>
 <img alt="Singleton Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/singleton/singleton-2x.png"/>
 <h1 id="structural-patterns">Structural Patterns</h1>
@@ -2611,6 +2796,100 @@ However we could generalize the Builder class in order to reuse the code.</p>
 
 </div></code></pre>
 <h3 id="text-formatting-example">Text Formatting Example</h3>
+<p>This is an example shown in the Gang of Four book.
+It shows how editing text can be done with this memory saving technic.</p>
+<pre><code class="language-C#"><div><span class="hljs-comment">// The problem with this approach is that we are spending a lot of memory that is not actually necessary</span>
+<span class="hljs-comment">// And for each different formatting you would need even more memory</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FormattedText</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">string</span> _plainText;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span>[] _capitalize;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FormattedText</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> plainText</span>)</span>
+    {
+        _plainText = plainText;
+        _capitalize = <span class="hljs-keyword">new</span> <span class="hljs-keyword">bool</span>[_plainText.Length];
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Capitalize</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end</span>)</span>
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt;= end; i++)
+        {
+            capitalize[i] = <span class="hljs-literal">true</span>;
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; _plainText.Length; i++)
+        {
+            <span class="hljs-keyword">var</span> c = _plainText[i];
+            sb.Append(Capitlize[i] ? <span class="hljs-keyword">char</span>.ToUpper(c) : c);
+        }
+        <span class="hljs-keyword">return</span> sb.ToString();
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BetterFormattedText</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> _plainText;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">TextRange</span>&gt; formatting</span> = <span class="hljs-keyword">new</span> List&lt;TextRange&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BetterFormattedText</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> plainText</span>)</span>
+    {
+        _plainText = plainText;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TextRange <span class="hljs-title">GetRange</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> range = <span class="hljs-keyword">new</span> TextRange {Start = start, End = end};
+        formatting.Add(range);
+        <span class="hljs-keyword">return</span> range;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> index = <span class="hljs-number">0</span>; index &lt; _plainText.Length; index++)
+        {
+            <span class="hljs-keyword">var</span> c = _plainText[index];
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> range <span class="hljs-keyword">in</span> formatting)
+            {
+                <span class="hljs-keyword">if</span>(range.Covers(index))
+                    <span class="hljs-keyword">if</span> (range.Capitalize)
+                        c = <span class="hljs-keyword">char</span>.ToUpper(c);
+                sb.Append(c);
+            }
+        }
+        <span class="hljs-keyword">return</span> sb.ToString();
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TextRange</span>
+    {
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> Start, End;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span>, Capitalize, Bold, Italic;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Covers</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> position</span>)</span>
+        {
+            <span class="hljs-keyword">return</span> position &gt;= Start &amp;&amp; position&lt;= End;
+        }
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> ft = <span class="hljs-keyword">new</span> FormattedText(<span class="hljs-string">&quot;The left hand of dakness is light and the right hand of light is darkness&quot;</span>);
+        ft.Capitalize(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>);
+        Console.WriteLine(ft);
+
+        <span class="hljs-keyword">var</span> bft = <span class="hljs-keyword">new</span> BetterFormattedText(<span class="hljs-string">&quot;The left hand of dakness is light and the right hand of light is darkness&quot;</span>);
+        bft.GetRange(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>).Capitalize = <span class="hljs-literal">true</span>;
+    }
+}
+</div></code></pre>
 <h2 id="proxy"><a href="https://refactoring.guru/design-patterns/proxy">Proxy</a></h2>
 <img alt="Builder Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/proxy/proxy-2x.png"/>
 <h1 id="behavioral-patterns">Behavioral Patterns</h1>
@@ -2626,9 +2905,9 @@ However we could generalize the Builder class in order to reuse the code.</p>
 <h2 id="memento"><a href="https://refactoring.guru/design-patterns/memento">Memento</a></h2>
 <img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/memento/memento-en-2x.png"/>
 <h2 id="null-object">Null Object</h2>
-<h2 id="observerhttpsrefactoringgurudesign-patternsobserver">Observer(<a href="https://refactoring.guru/design-patterns/observer">https://refactoring.guru/design-patterns/observer</a>)</h2>
+<h2 id="observer"><a href="https://refactoring.guru/design-patterns/observer">Observer</a></h2>
 <img alt="Observer Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/observer/observer-2x.png"/>
-<h2 id="statehttpsrefactoringgurudesign-patternsstate">State(<a href="https://refactoring.guru/design-patterns/state">https://refactoring.guru/design-patterns/state</a>)</h2>
+<h2 id="state"><a href="https://refactoring.guru/design-patterns/state">State</a></h2>
 <img alt="State Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/state/state-en-2x.png"/>
 <h2 id="strategy"><a href="https://refactoring.guru/design-patterns/strategy">Strategy</a></h2>
 <img alt="Strategy Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/strategy/strategy-2x.png"/>
@@ -2697,8 +2976,8 @@ Usually these semlls do not crop up right away, rather they accumulate over time
 }
 </div></code></pre>
 <h4 id="recipe-2">Recipe #2</h4>
-<p>Reduce Local Variables and Parameters Before Extracting a Method
-If local variables and parameters interfere with extracting a method, use Replace Temp with Query, Introduce Parameter Object or Preserve Whole Object.</p>
+<p><strong>Reduce Local Variables and Parameters Before Extracting a Method</strong>
+If local variables and parameters interfere with extracting a method, use <strong>Replace Temp with Query</strong>, I<strong>ntroduce Parameter Object</strong> or <strong>Preserve Whole Object.</strong></p>
 <ul>
 <li>Replace Temp with Query
 <ul>
@@ -2790,8 +3069,8 @@ AmountOverdueIn(DateRange range);
 boolean withinPlan = plan.WithinRange(daysTempRange);
 </div></code></pre>
 <h4 id="recipe-3">Recipe #3</h4>
-<p>Replace Method with Method Object
-If none of the previous recipes help, try moving the entire method to a separate object via Replace Method with Method Object.</p>
+<p><strong>Replace Method with Method Object</strong>
+If none of the previous recipes help, try moving the entire method to a separate object via <strong>Replace Method with Method Object.</strong></p>
 <ul>
 <li>Problem
 <ul>
@@ -2850,4 +3129,515 @@ Conditionals operators and loops are a good clue that code can be moved to a sep
 </li>
 <li>Solution
 <ul>
+<li>Decompose the complicated parts of the conditional into separate methods: the condiction, else if and else;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">if</span> (date.Before(SUMMER_START) || date.After(SUMMER_END))
+    charge = quantity * winterRate * winterServiceCharge;
+<span class="hljs-keyword">else</span>
+    charge = quantity * summerRate;
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-keyword">if</span> (isSummer(date))
+    charge = SummerCharge(quantity);
+<span class="hljs-keyword">else</span>
+    charge = WinterCharge(quanity);
+</div></code></pre>
+<ul>
+<li>Loops
+<ul>
+<li>Problem
+<ul>
+<li>You have a code fragment that can be grouped together</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Move this code to a separate new method (or function) and replace the old code with a call to the method</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintProperties</span>(<span class="hljs-params">List&lt;User&gt; users</span>)</span>
+{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; users.Length; i++)
+    {
+        <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> StringBuilder();
+        result.Append(users[i].Name())
+                 .Append(<span class="hljs-string">&quot; &quot;</span>)
+                 .AppendLine(users[i].Age());
+        Console.WriteLine(result);
+    }
+}
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintProperties</span>(<span class="hljs-params">List&lt;User&gt; users</span>)</span>
+{
+    <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> user <span class="hljs-keyword">in</span> user)
+        Console.WriteLine(GetProperties(user))/
+}
+
+<span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">GetProperties</span>(<span class="hljs-params">User use</span>)</span>
+{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{user.Name}</span> - <span class="hljs-subst">{user.Age}</span>&quot;</span>;
+}
+</div></code></pre>
+<h4 id="payoff">Payoff</h4>
+<p>Among all types of object-oriented code, classes with short methods live longest. The longer a method or function is, the harder it becomes to understand and maintain it.
+In addition, long methods offer the perfect hiding place of unwanted duplicate code.</p>
+<ul>
+<li>Performace
+<ul>
+<li>Does an increase in numver of methods hurt performance, as many people clain? In almost all cases the impact is so negligible that it's not even worth worrying about.</li>
+<li>Plus, now that you have clear and understandable code, you're more likely to find truly effective methods for restructuring code and getting real performance gains if the need ever arises.</li>
+</ul>
+</li>
+</ul>
+<h3 id="large-class">Large Class</h3>
+<p>A class that contains many fields/methods/lines of code.</p>
+<ul>
+<li>Reason for the Problem
+<ul>
+<li>Classes usually start small. But over time, they get bloated as the program grows.</li>
+<li>As is the case with long methods as well, programmers usually find it mentally less taxing to place a new feature in an existing class than to create a new class for the feature... (it happens all the time, lol).</li>
+</ul>
+</li>
+<li>Treatment
+<ul>
+<li>When a class is wearing too many (functional) gats, think about splitting it up.</li>
+</ul>
+</li>
+</ul>
+<h4 id="recipe-1-1">Recipe 1#</h4>
+<p>Extract Class
+Extract Class helps if part of the behavior of the large class can be spun off into a separate component.</p>
+<ul>
+<li>Problem
+<ul>
+<li>When one class does the work of two, awkwardness results.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Instead, create a new class and place the fields and methods responsible for the relevant functionality in it.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeAreaCode;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeNumber;
+}
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
+    <span class="hljs-keyword">public</span> TelephoneNumber telephone;
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">TelephoneNumber</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeAreaCode;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> OfficeNumber;
+}
+</div></code></pre>
+<h4 id="recipe-2-1">Recipe #2</h4>
+<p>Extract Subclass
+Extract Subclass helps if part of the behavior of the large class can be implemented in different ways or is used in rare cases.</p>
+<ul>
+<li>Problem
+<ul>
+<li>A class has features that are used only in certain cases</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="180px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Subclass%20-%20Before.png"/>
+<ul>
+<li>Solution
+<ul>
+<li>Create a subclass and use it in these cases</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="360px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Subclass%20-%20After.png"/>
+<h4 id="recipe-3-1">Recipe #3</h4>
+<p>Extract Interface
+Extract Interface helps if it's necessary to have a list of the operations and behaviors that the client can use.</p>
+<ul>
+<li>Problem
+<ul>
+<li>Multiple clients are using the same part of a class interface.</li>
+<li>Another case: part of the interface int two classes are the same</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="180px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Interface%20-%20Before.png"/>
+<ul>
+<li>Solution
+<ul>
+<li>Move this identical portion to its own interface</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="360px" src="https://refactoring.guru/images/refactoring/diagrams/Extract%20Interface%20-%20After.png"/>
+<h4 id="recipe-4-1">Recipe 4#</h4>
+<p>Separate GUI and Domain Data
+If a large class is responsible for the graphical interface. you may try to move some of its data and behavior to a separate domain object. In doing so, it may be necessary to store copies of some data in two places and keep the data consistent. Duplicate Observed Data offers a way to do this.</p>
+<ul>
+<li>Problem
+<ul>
+<li>Is domain data stored in classes responsible for the GUI.</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="180px" src="https://refactoring.guru/images/refactoring/diagrams/Duplicate%20Observed%20Data%20-%20Before.png"/>
+<ul>
+<li>Solution
+<ul>
+<li>Then it's a good idea to separate the data into separate classes, ensuring connection and synchronyzation between the domain class and the GUI.</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="360px" src="https://refactoring.guru/images/refactoring/diagrams/Duplicate%20Observed%20Data%20-%20After.png"/>
+<h4 id="payoff-1">Payoff</h4>
+<ul>
+<li>Refactoring these classes spares developers from needing to remember a large number of attributes of a class.</li>
+<li>In many cases, splitting Large classes into parts avoid duplication of code functionality</li>
+</ul>
+<h3 id="primitive-obsession">Primitive Obsession</h3>
+<ul>
 <li>
+<p>Use of primitives instead of small objects for simple tasks (such as currency, ranges, special strings for phone numbers, etc);</p>
+</li>
+<li>
+<p>Use of constant for coding information (such as constant USER_ADMIN_ROLE =1 for referring to users with administrator rights).</p>
+</li>
+<li>
+<p>Use o string constants as field names for use in data arrays</p>
+</li>
+<li>
+<p>Rason for the Problem</p>
+<ul>
+<li>Like most other smelss, primitive obsessions are born in moments of weakness. &quot;Just a field for storing some data!&quot; the programmer said. Creating a primite field is so much easier than making a whole new class, right? And so it was done. Then another field was needed and added in the same way. Lo and behold, the class becae huge and unwieldy.</li>
+<li>Primitives are often used to &quot;simulate&quot; types. So instead of a separate data type, you have a set of numbers of strings that form the list of allowable values for some entity. Easy-to-understand names are then given to these specific numbers and strings via constants, which is why they're spread wide and far.</li>
+<li>Another example of poor primitive use is field simulation. The class contains a large array of diverse data and string constants (which are specified in the class) are used as array indices for getting this data.</li>
+</ul>
+</li>
+</ul>
+<h4 id="recipe-1-2">Recipe #1</h4>
+<p><strong>Replace Set of Fields with Object</strong>
+If you have a large variety of primitive fields, it may bepossible to logically group some of them into their own class or struct. Even better, move the behavior associated with this data into the class too. For this task, try <strong>Replace Data Value with Object.</strong></p>
+<ul>
+<li>Problem
+<ul>
+<li>A class (or group of classes) contains a data field. The field has its own behavior and associated data.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Create a new class, place the old field and its behavior in the class, and store the object of the class in the original class.</li>
+</ul>
+</li>
+</ul>
+<h4 id="recipe-2-2">Recipe #2</h4>
+<p><strong>Primitive Fields in Method Parameters</strong>
+If the values of primitive fields are used in method parameters, go with <strong>Introduce Parameter Object</strong> or <strong>Preserve Whole Object.</strong></p>
+<ul>
+<li>
+<p>Introduce Parameter Object</p>
+<ul>
+<li>Problem
+<ul>
+<li>Your methods contain a repeating group of parameters.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Replace these parameters with an object.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Preserve Whole Object</p>
+<ul>
+<li>Problem
+<ul>
+<li>You get several values from an object and then pass them as parameters to a method.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Instead, try passing the whole object.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="recipe-3-2">Recipe #3</h4>
+<p><strong>Get Rid of type Codes</strong>
+When complicated data is coded in variables, use <strong>Replace Type Code with Class</strong>, <strong>Replace Type Code with Subclasses</strong> or <strong>Replace Type Code with State/Strategy</strong></p>
+<ul>
+<li>Replace Type Code with Class
+<ul>
+<li>Problem
+<ul>
+<li>A class has a field that contains type code. The values of this type aren't ussed in operator conditions and don't affect the behavior of the program.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="180px" src="https://refactoring.guru/images/refactoring/diagrams/Replace%20Type%20Code%20with%20Class%20-%20Before.png"/>
+<ul>
+<li>Solution
+<ul>
+<li>Create a new class and use its objects instead of the type code values.</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="360px" src="https://refactoring.guru/images/refactoring/diagrams/Replace%20Type%20Code%20with%20Class%20-%20After.png"/>
+<ul>
+<li>Replace Type Code with Subclasses
+<ul>
+<li>Problem
+<ul>
+<li>You have a coded type that directly affects program behavior (values of this field trigget various code in conditionals).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="180px" src="https://refactoring.guru/images/refactoring/diagrams/Replace%20Type%20Code%20with%20Subclasses%20-%20Before.png"/>
+<ul>
+<li>Solution
+<ul>
+<li>Create subclasses for each value of the coded type. Then extract the relevant behaviors from the original class to these subclasses. Replace the control flow code with polymorphism.</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/refactoring/diagrams/Replace%20Type%20Code%20with%20Subclasses%20-%20After.png"/>
+<ul>
+<li>Replace Type with State/Strategy
+<ul>
+<li>Problem
+<ul>
+<li>You have a coded type that affects behavior but you can't use subclasses to get rid of it</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="180px" src="https://refactoring.guru/images/refactoring/diagrams/Replace%20Type%20Code%20with%20State-Strategy%20-%20Before.png"/>
+<ul>
+<li>Solution
+<ul>
+<li>Replace type code with a state object. If it's necesary to replace a field value with type code, another state object is &quot;plugged in&quot;.</li>
+</ul>
+</li>
+</ul>
+<img alt="Memento Design Pattern" height="180px" src="https://refactoring.guru/images/refactoring/diagrams/Replace%20Type%20Code%20with%20State-Strategy%20-%20After.png"/>
+<h4 id="recipe-4-2">Recipe #4</h4>
+<p><strong>Replace Array with Object</strong>
+If there are arrays among the variables, use <strong>Replace Array with Objects.</strong></p>
+<ul>
+<li>Problem
+<ul>
+<li>You have an array that contains various types of data.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Replace the array with an object that will have separate fields for each element.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">string</span>[] row = <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[<span class="hljs-number">2</span>];
+row[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;Liverpool&quot;</span>;
+row[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;15&quot;</span>;
+
+<span class="hljs-comment">// Solution</span>
+Performance row = <span class="hljs-keyword">new</span> Performance();
+row.SetName(<span class="hljs-string">&quot;Liverpool&quot;</span>);
+row.SetWins(<span class="hljs-string">&quot;15&quot;</span>);````
+</div></code></pre>
+<h4 id="payoff-2">Payoff</h4>
+<ul>
+<li>Code becomes more flexible thanks to use of objects instead of primitives.</li>
+<li>Better understandability and organization of code. Operations on particular data are in the same place, instead of being scattered. No more guessing about the reason for all these strange constants and why they're in the array.</li>
+<li>Easier finding of duplicate code.</li>
+</ul>
+<h3 id="long-parameters-list">Long Parameters List</h3>
+<p>More than three or four parameters for a method.</p>
+<ul>
+<li>Reasons for the Problem
+<ul>
+<li>A long list of parameters might happen after several types of algorithms are merged in a single method. A long list may have been created to control which algorithms will be run and how.</li>
+<li>Long parameter lists may also be the byproduct of efforts to make classes more independent of each other. For example, the code for creating specific objects needed in a method was moved from the method to the code for calling the method, but the created objects are passed to the method as parameters. Thus the original class no longer knows about the relationships between objects, and dependency has decreased. But if several of these objects are created, each of them will require its own parameter, which means a longer parameters list.</li>
+<li>It's hard to understand such lists, which become contradictory and hard to use as they grow longer. Instead of a long list of parameters, a method can use the data of its own object. If the current object doesn't contain all necessary data, another object (which will get the necessary data) can be passed as method parameter.</li>
+</ul>
+</li>
+</ul>
+<h4 id="recipe-1-3">Recipe #1</h4>
+<p><strong>Replace Parameter with Method Call</strong>
+Check what values are passed to parameters. If some of the arguments are just results of method calls of another object, use <strong>Replace Parameter with Method Call</strong>. This object can be placed in the field of its own class or passed as a method parameter.</p>
+<ul>
+<li>Problem
+<ul>
+<li>Calling a query method and passing its results as the parameters of another method, while that method could call the query directly.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Instead of passing the value through a parameter, try placing a query call inside the method body.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Problem</span>
+<span class="hljs-keyword">int</span> basePrice = quantity * itemPrice;
+<span class="hljs-keyword">double</span> seasonDiscount = <span class="hljs-keyword">this</span>.fees; 
+<span class="hljs-keyword">double</span> fees = <span class="hljs-keyword">this</span>.fees;
+<span class="hljs-keyword">double</span> FinalPrice = DiscountedPrice(basePrice, seasonDiscount, fees);
+
+<span class="hljs-comment">// Solution</span>
+<span class="hljs-keyword">int</span> basePrice = quantity * itemPrince;
+<span class="hljs-keyword">double</span> finalPrice = discountedPrice(basePrice);
+</div></code></pre>
+<h4 id="recipe-2-3">Recipe #2</h4>
+<p><strong>Preserve Whole Object</strong>
+Instead of passing a group of data received from another object as parameters, pass the object itself to the method, by using <strong>Preserve Whole Object.</strong></p>
+<ul>
+<li>Problem
+<ul>
+<li>You get several values from an object and then pass them as parameters to a method</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Instead, try passing the whole Object</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">int</span> low = dasTempRange.Low;
+<span class="hljs-keyword">int</span> high = daysTempRange.High;
+<span class="hljs-keyword">bool</span> withinPlan = plan.WithinRange(low, high);
+
+<span class="hljs-comment">// Solution</span>
+boolean withinPlan = plan.WithinRange(daysTempRange);
+</div></code></pre>
+<h4 id="recipe-3-3">Recipe #3</h4>
+<p><strong>Introduce Parameter Object</strong>
+If there are several unrelated data elements, sometimes you can merge them into a single parameter object via <strong>Introduce Parameter Object.</strong></p>
+<ul>
+<li>Problem
+<ul>
+<li>Your methods contain a repeating group of parameters.</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Replace these parameters with an object</li>
+</ul>
+</li>
+</ul>
+<h4 id="payoff-3">Payoff</h4>
+<ul>
+<li>
+<p>More readable, shorter code.</p>
+</li>
+<li>
+<p>Refactoring may reveal previously unnoticed duplicate code.</p>
+</li>
+<li>
+<p>When to ignore</p>
+<ul>
+<li>Don't get rid of parameters if doing so would cause unwanted dependency between classes.</li>
+</ul>
+</li>
+</ul>
+<h1 id="multithreading">Multithreading</h1>
+<h2 id="asynchrony">Asynchrony</h2>
+<p>Asynchrony refers to the occurece of events independent of the main program flow and ways to deal with such events.</p>
+<h2 id="thread">Thread</h2>
+<p>A thread of execution is the samllest sequence of programmed instructions that can be managed independently by a scheduler, which is typically a part of the operating system.</p>
+<p>A thread is a component of a process. Multiple threads can exist within one process, executing concurrently and sharing resources such as memory.</p>
+<ul>
+<li>Thread are independent units which isolates sets of instructions from each other</li>
+<li>Thread has its own local storage called TLS or Thread Local Storage</li>
+<li>Any thread can exist only within a particular process and they can't migrate from one process to another</li>
+<li>One process can spawn many threads
+<ul>
+<li>While threadss isolate their own storages, they can easily share all the resources of an executing process such as heap memory.</li>
+</ul>
+</li>
+<li>For asynchronous processing, we create and run nwe threads rather than processes</li>
+</ul>
+<h3 id="threadpool-and-scheduling">ThreadPool and Scheduling</h3>
+<ul>
+<li>Thread pool is a storage of threads which allocate them when requested by a running process</li>
+<li>Threads have to be scheduled by some sort of mechanism (Thread Scheduler)</li>
+<li>Thread Scheduler is responsible for allocating processing cores and running particular threads on them.</li>
+</ul>
+<h2 id="multithreading-1">Multithreading</h2>
+<h2 id="parallel-computing">Parallel Computing</h2>
+<p>In parallel computing, execution occurs at the same physical instant: for example, on separate processors of a multi-processor machine, with the goal of speeding up computations - parallel computing is impossible on a (one-core) single processor, as only one computation can occur at any instant.</p>
+<p>Parallel computing is a type of computation in which many calculations or the execution of processes are carried out concurrently. Large problems can often be divided into smaller ones, which can then be solved at the same time.</p>
+<h2 id="concurrency">Concurrency</h2>
+<p>Concurrent programs handle tasks that are all in progress at the same time, but is only necessary to work briefly and separately on each task. so the work can be interleaved in whatever order the tasks require.</p>
+<p>Concurrent computing consists of process lifetimes overlapping, but execution need not happen at the same instant. The goal here is to model processors in the outside world that happen concurrently, such as multiple clients accessing a server at the same time.</p>
+<h1 id="aspnet-core"><a href="http://ASP.NET">ASP.NET</a> Core</h1>
+<h2 id="introduction-to-net-core-which-now-is-only-called-net">Introduction to .NET Core (Which now is only called .NET)</h2>
+<ul>
+<li>
+<p>.NET was not a new version of the .NET Framework, but it was an entirely new framework created to build Desktop, Web, Cloud and Mobile Applications.</p>
+</li>
+<li>
+<p>With .NET 5 it is unified</p>
+</li>
+<li>
+<p>It is a Cross-Platform and Open-Source Framework developed by Microsoft and released under MIT License</p>
+</li>
+<li>
+<p>.NET is a modular framework, and so it is possible to run two web applications with different versions of .NET on the same Server</p>
+</li>
+<li>
+<p>What can you make with it?</p>
+<ul>
+<li>Desktop Apps</li>
+<li>WEb apps</li>
+<li>Cloud Apps</li>
+<li>mobile Apps</li>
+<li>Games</li>
+<li>IoT</li>
+<li>AI</li>
+</ul>
+</li>
+<li>
+<p>Some components of .NET</p>
+<ul>
+<li>Entity Framework Core - It is an open-source and cross-platform version of the Entity Framework. It Serves as Object Relation model (ORM) to connect to the database using the entity model.</li>
+<li>Identity Core - Identity Core is used to implement the form of authentication and roles and permission. It allows us to implement the login and register features to the application</li>
+<li>MVC Core - MVC Core is an open-source MVC project under the .NET Core framework</li>
+<li>Razor Core (Razor Pages) - Razor Pages is a project type under the .NET Core framework. It's a new type of project where there is no need to write controllers, and the controller logic and the routing can be placed in the view page itself.</li>
+<li>SignalR - is a free and open-source software library for <a href="http://ASP.NET">ASP.NET</a></li>
+<li>Blazor - Blazor .NET is an experimental project from Microsoft that allows developers to write the client-side code in C# language. It is composed of reusable components and servers the requirement of a single page application. It is based on the We Assembly concept.</li>
+</ul>
+</li>
+</ul>
+<h1 id="made-by">Made by</h1>
+<ul>
+<li><a href="https://github.com/HollowLukeDias">Luke Dias</a></li>
+</ul>
+
+    </body>
+    </html>
