@@ -175,6 +175,12 @@
 <li><a href="#abstract-factory-and-ocp">Abstract Factory and OCP</a></li>
 </ul>
 </li>
+<li><a href="#summary-1">Summary</a></li>
+</ul>
+</li>
+<li><a href="#prototype">Prototype</a>
+<ul>
+<li><a href="#the-problems-with-icloneable">The Problems with ICloneable</a></li>
 </ul>
 </li>
 <li><a href="#singleton">Singleton</a></li>
@@ -199,7 +205,12 @@
 <li><a href="#behavioral-patterns">Behavioral Patterns</a>
 <ul>
 <li><a href="#chain-of-responsability">Chain of Responsability</a></li>
-<li><a href="#command">Command</a></li>
+<li><a href="#command">Command</a>
+<ul>
+<li><a href="#composite-command">Composite Command</a></li>
+<li><a href="#summary-2">Summary</a></li>
+</ul>
+</li>
 <li><a href="#interpreter">Interpreter</a></li>
 <li><a href="#iterator">Iterator</a></li>
 <li><a href="#mediator">Mediator</a></li>
@@ -2648,8 +2659,180 @@ internal class CoffeeFactory : IHotDrinkFactory
         Console.WriteLine($&quot;</span>Grind some BEANS, boil WATER, pour {amount} ml of BLOOD, <span class="hljs-keyword">add</span> HATE and FEAR. Your coffee <span class="hljs-keyword">is</span> ready.<span class="hljs-string">&quot;);
     }
 }
-</span></div></code></pre>
+
+public class HotDrinkMachine
+{
+    public enum AvailableDrink
+    {
+        Coffee, Tea
+    }
+
+    private Dictionary&lt;AvailableDrink, IHotDrinkFactory&gt; factories = new Dictionary&lt;AvailableDrink, IHotDrinkFactory&gt;();
+
+    public HotDrinkMachine()
+    {
+        foreach (AvailableDrink drink in Enum.GetValues(typeof(AvailableDrink)))
+        {
+            var factory = (IHotDrinkFactory)Activator.CreateInstance(
+                Type.GetType(&quot;</span>DesignPatterns.<span class="hljs-string">&quot; + Enum.GetName(typeof(AvailableDrink).drink) + &quot;</span>Factory));
+                factories.Add(drink, factory);
+            )
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IHotDrink <span class="hljs-title">MakeDrink</span>(<span class="hljs-params">Available drink, <span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> factories[drink].Prepare(amount);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> machine = <span class="hljs-keyword">new</span> HotDrinkMachine();
+        <span class="hljs-keyword">var</span> drink = machine.MakeDrink(HotDrinkMachine.AvailableDrink.Tea, <span class="hljs-number">100</span>);
+        drink.Consume() ;
+    }
+}
+</div></code></pre>
 <h4 id="abstract-factory-and-ocp">Abstract Factory and OCP</h4>
+<p>The problem with doing the Abstract Factory the way we did previously is that we are breaking the Open/Closed Principle by having a ENUM inside the HotDrinkMachine class. If we leave it as is, everytime we create a new HotDrink, we need to add a new enum there, which breaks the OCP.</p>
+<pre><code class="language-C#"><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HotDrinkMachine</span>(<span class="hljs-params"></span>)</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">Tuple</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">IHotDrinkFactory</span>&gt;&gt; factories</span> = <span class="hljs-keyword">new</span> List&lt;Tuple&lt;<span class="hljs-keyword">string</span>, IHotDrinkFactory&gt;&gt;();
+
+    <span class="hljs-keyword">foreach</span> (<span class="hljs-function"><span class="hljs-keyword">var</span> t <span class="hljs-keyword">in</span> <span class="hljs-title">typeof</span>(<span class="hljs-params">HotDrinkMachine</span>).Assembly.<span class="hljs-title">GetType</span>(<span class="hljs-params"></span>))</span>
+    {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(IHotDrinkFactory).IsAssignableFrom(t) &amp;&amp; !t.IsInterface)
+        {
+            factories.Add(Tuple.Create(
+                t.Name.Replace(<span class="hljs-string">&quot;Factory&quot;</span>, <span class="hljs-keyword">string</span>.Empty),
+                (IHotDrinkFactory)Activator.CreateInstance(t)
+            ));
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IHotDrink <span class="hljs-title">MakeDrink</span>(<span class="hljs-params"></span>)</span>
+    {
+        WriteLine(<span class="hljs-string">&quot;Available drinks: &quot;</span>)/
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> index = <span class="hljs-number">0</span>; index &lt; factories.Count; index++)
+        {
+            <span class="hljs-keyword">var</span> tuple = factories[index];
+            WriteLine(<span class="hljs-string">$&quot;<span class="hljs-subst">{index}</span>: <span class="hljs-subst">{tuple.Item1}</span>&quot;</span>);
+        }
+        <span class="hljs-comment">// Implement way of getting both the amount and the drink from the user</span>
+        <span class="hljs-keyword">return</span> factories[optionChosenByUser].Item2.Prepare(amountChosenByUser);
+    }
+}
+</div></code></pre>
+<h3 id="summary-1">Summary</h3>
+<ul>
+<li>A Factory Method is a static method that creates objects</li>
+<li>A Factory can take care of an object creation</li>
+<li>A Factory can be external or reside inside the object as a inner class</li>
+<li>Hierarchies of factories can be used to create related objects</li>
+</ul>
+<h2 id="prototype"><a href="https://refactoring.guru/design-patterns/prototype">Prototype</a></h2>
+<img alt="Prototype Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/prototype/prototype-2x.png"/>
+<ul>
+<li>
+<p>Motivations</p>
+<ul>
+<li>Complicated objects (e.g., cars) aren't designed from scratch
+<ul>
+<li>They reiterate existing designs</li>
+</ul>
+</li>
+<li>An Existing (Partially or fully constructed) design is a Prototype</li>
+<li>We make a copy (clone) the prototype and customize it
+<ul>
+<li>Requires 'deep copy' support</li>
+</ul>
+</li>
+<li>We make the cloning convenient (r.g., via Factory)</li>
+</ul>
+</li>
+<li>
+<p>Protype is a Partially or fully initialized object that you copy (clone) and make use of.</p>
+</li>
+</ul>
+<h3 id="the-problems-with-icloneable">The Problems with ICloneable</h3>
+<p>There are two types of Cloning</p>
+<ul>
+<li>Deep Clone
+<ul>
+<li>When you are deep cloning an object you are also creating clones of every reference type inside it, using their values to create the new object.</li>
+</ul>
+</li>
+<li>Shallow Clone
+<ul>
+<li>When you are shallow cloning, you are</li>
+</ul>
+</li>
+</ul>
+<p>The problem with ICloneable is it is a very old Interface which is very unspecific about what it actually does, is it supposed to be a shallow clone or a deep clone method? Since Microsoft itself uses the Interface as a way to Shallow Clone its objects, then you must suppose it is used to achieve that, however, the Prototype Pattern demands that you have Deep Clones of an object, and therefore  you should probably avoid using ICloneable when using the Prototype Pattern.
+Another problem with the ICloneable interface is that the Clone() method returns an object type, which demands you to cast the actual type whenever you are using it, or create a method that will call the Clone() method for you and then return the correct type, either way it adds more code and makes it harder to understand what is happening.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> : <span class="hljs-title">ICloneable</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span>[] Names;
+    <span class="hljs-keyword">private</span> Address Address;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] names, Address address</span>)</span>
+    {
+        Names = names ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(names));
+        Address = address ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(names));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Names)}</span>: <span class="hljs-subst">{<span class="hljs-keyword">string</span>.Join(<span class="hljs-string">&quot; &quot;</span>, Names)}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Address)}</span>: <span class="hljs-subst">{Address}</span>&quot;</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">object</span> <span class="hljs-title">Clone</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Shallow</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Person(Names, Address);
+
+        <span class="hljs-comment">// Deep</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Person(Names, (Address) Address.Clone()); 
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Address</span> : <span class="hljs-title">ICloneable</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> StreetName;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> HouseNumber;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Address</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> streetName, <span class="hljs-keyword">int</span> houseNumber</span>)</span>
+    {
+        StreetName = streetName ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(streetName));
+        HouseNumber = houseNumber;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(StreetName)}</span>: <span class="hljs-subst">{StreetName}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(HouseNumber)}</span>: <span class="hljs-subst">{HouseNumber}</span>&quot;</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">object</span> <span class="hljs-title">Clone</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Shallow</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Address(StreetName, HouseNumber);
+    }
+}
+
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+[
+    <span class="hljs-title">static</span> <span class="hljs-title">void</span> <span class="hljs-title">Main</span>()
+    {
+        <span class="hljs-keyword">var</span> luke = <span class="hljs-keyword">new</span> Person(<span class="hljs-keyword">new</span> []{<span class="hljs-string">&quot;Luke&quot;</span>, <span class="hljs-string">&quot;Dias&quot;</span>},
+            <span class="hljs-keyword">new</span> Address(<span class="hljs-string">&quot;Figueiredo Magalhães&quot;</span>, <span class="hljs-number">123</span>));
+        
+        WriteLine(luke);
+    }
+]
+</div></code></pre>
 <h2 id="singleton"><a href="https://refactoring.guru/design-patterns/singleton">Singleton</a></h2>
 <img alt="Singleton Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/singleton/singleton-2x.png"/>
 <h1 id="structural-patterns">Structural Patterns</h1>
@@ -2897,6 +3080,260 @@ It shows how editing text can be done with this memory saving technic.</p>
 <img alt="Chain of Responsability Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/chain-of-responsibility/chain-of-responsibility-2x.png"/>
 <h2 id="command"><a href="https://refactoring.guru/design-patterns/command">Command</a></h2>
 <img alt="Command Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/command/command-en-2x.png"/>
+<ul>
+<li>
+<p>Motivations</p>
+<ul>
+<li>Ordinary C# statements are perishable
+<ul>
+<li>Cannot undo a field/property assignment</li>
+<li>Cannot directly serialize a sequence of actions (calls)</li>
+</ul>
+</li>
+<li>Want an object that represents an operation
+<ul>
+<li>X should change its property Y yo Z</li>
+<li>X should do W()</li>
+</ul>
+</li>
+<li>Uses: GUI commands, multi-level undo/redo, macro recording, etc.</li>
+</ul>
+</li>
+<li>
+<p>An object which represents an instruction to perform a particular actiom. Contains all the information necessary for the action to be taken.</p>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BankAccount</span>
+{
+    <span class="hljs-keyword">private</span> _balance;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> overdraftLimit = <span class="hljs-number">-500</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Deposit</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        _balance += amount;
+        WriteLine(<span class="hljs-string">$&quot;Deposited $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Withdraw</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (_balance - amount &gt;= overdraftLimit)
+        {
+            _balance -= amount;
+            WriteLine(<span class="hljs-string">$&quot;Withdrew $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-keyword">bool</span> Success { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BanckAccountCommand</span> : <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-keyword">private</span> BankAccount _account;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Action
+    {
+        Deposit, Withdraw
+    }
+
+    <span class="hljs-keyword">private</span> Action _action;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> _amount;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span> _succeeded;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BankAccountCommand</span>(<span class="hljs-params">BankAccount account, Action action, <span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        _account = account ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(account));
+
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                _succeeded = account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (!_succeeded)
+            <span class="hljs-keyword">return</span>;
+
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> ba = <span class="hljs-keyword">new</span> BankAccount();
+        <span class="hljs-keyword">var</span> commands = <span class="hljs-keyword">new</span> List&lt;BankAccountCommand&gt;{
+            <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Deposit, <span class="hljs-number">100</span>),
+            <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Withdraw, <span class="hljs-number">50</span>)
+        };
+
+        
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> c <span class="hljs-keyword">in</span> commands)
+            c.Call();
+    
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> c <span class="hljs-keyword">in</span> Enumerable.Reverse(commands))
+            c.Undo();
+    }
+}
+</div></code></pre>
+<h3 id="composite-command">Composite Command</h3>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BankAccount</span>
+{
+    <span class="hljs-keyword">private</span> _balance;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> overdraftLimit = <span class="hljs-number">-500</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Deposit</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> ()
+        _balance += amount;
+        WriteLine(<span class="hljs-string">$&quot;Deposited $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Withdraw</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (_balance - amount &gt;= overdraftLimit)
+        {
+            _balance -= amount;
+            WriteLine(<span class="hljs-string">$&quot;Withdrew $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-keyword">bool</span> Success { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CompositeBankAccount</span> : <span class="hljs-title">List</span>&lt;<span class="hljs-title">BankAccountCommand</span>&gt;, <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>
+    {
+        ForEach(cmd =&gt; cmd.Call());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-function"><span class="hljs-keyword">var</span> cmd <span class="hljs-title">in</span> (<span class="hljs-params">(IEnumerable&lt;BankAccountCommand&gt;</span>) <span class="hljs-keyword">this</span>). <span class="hljs-title">Reverse</span>(<span class="hljs-params"></span>))</span>
+        {
+            <span class="hljs-keyword">if</span> (cmd.Success) cmd.Undo();
+        }
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> Success
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.All(cmd =&gt; cmd.Success); )}
+        <span class="hljs-keyword">set</span> 
+        {
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> cmd <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>)
+                cmd.Success = <span class="hljs-keyword">value</span>;
+        }
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BanckAccountCommand</span> : <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-keyword">private</span> BankAccount _account;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Action
+    {
+        Deposit, Withdraw
+    }
+
+    <span class="hljs-keyword">private</span> Action _action;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> _amount;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span> _succeeded;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BankAccountCommand</span>(<span class="hljs-params">BankAccount account, Action action, <span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        _account = account ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(account));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                _succeeded = account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> deposit = <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Deposit, <span class="hljs-number">100</span>);
+        <span class="hljs-keyword">var</span> withdraw = <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Withdraw, <span class="hljs-number">50</span>);
+        <span class="hljs-keyword">var</span> composite = <span class="hljs-keyword">new</span> CompositeBankAccountCommand(<span class="hljs-keyword">new</span>[]{deposit, withdraw});
+
+        composite.Call();
+        WriteLine(ba);
+
+        composite.Undo();
+        WriteLine(ba); 
+    }
+}
+</div></code></pre>
+<h3 id="summary-2">Summary</h3>
+<ul>
+<li>Encapsulate all details of an operation in separate object</li>
+<li>Define instruction for applying the command (either in the command itself, or elsewhere)</li>
+<li>Optionally define instructions for undoing the command</li>
+<li>Can create composite commands (a.k.a. macros)</li>
+</ul>
 <h2 id="interpreter">Interpreter</h2>
 <h2 id="iterator"><a href="https://refactoring.guru/design-patterns/iterator">Iterator</a></h2>
 <img alt="Iterator Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/iterator/iterator-en-2x.png"/>
