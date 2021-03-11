@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Study File for Multithreading</title>
+        <style>
+/* From extension zhuangtongfa.material-theme */
+
+
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="study-file-for-multithreading">Study File for Multithreading</h1>
+<p><a href="index.html">Go back to index</a></p>
+<ul>
+<li><a href="#study-file-for-multithreading">Study File for Multithreading</a></li>
+<li><a href="#multithreading">Multithreading</a>
+<ul>
+<li><a href="#asynchrony">Asynchrony</a></li>
+<li><a href="#thread">Thread</a>
+<ul>
+<li><a href="#threadpool-and-scheduling">ThreadPool and Scheduling</a></li>
+</ul>
+</li>
+<li><a href="#multithreading-1">Multithreading</a></li>
+<li><a href="#parallel-computing">Parallel Computing</a></li>
+<li><a href="#concurrency">Concurrency</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="multithreading">Multithreading</h1>
+<h2 id="asynchrony">Asynchrony</h2>
+<p>Asynchrony refers to the occurece of events independent of the main program flow and ways to deal with such events.</p>
+<h2 id="thread">Thread</h2>
+<p>A thread of execution is the samllest sequence of programmed instructions that can be managed independently by a scheduler, which is typically a part of the operating system.</p>
+<p>A thread is a component of a process. Multiple threads can exist within one process, executing concurrently and sharing resources such as memory.</p>
+<ul>
+<li>Thread are independent units which isolates sets of instructions from each other</li>
+<li>Thread has its own local storage called TLS or Thread Local Storage</li>
+<li>Any thread can exist only within a particular process and they can't migrate from one process to another</li>
+<li>One process can spawn many threads
+<ul>
+<li>While threadss isolate their own storages, they can easily share all the resources of an executing process such as heap memory.</li>
+</ul>
+</li>
+<li>For asynchronous processing, we create and run nwe threads rather than processes</li>
+</ul>
+<h3 id="threadpool-and-scheduling">ThreadPool and Scheduling</h3>
+<ul>
+<li>Thread pool is a storage of threads which allocate them when requested by a running process</li>
+<li>Threads have to be scheduled by some sort of mechanism (Thread Scheduler)</li>
+<li>Thread Scheduler is responsible for allocating processing cores and running particular threads on them.</li>
+</ul>
+<h2 id="multithreading-1">Multithreading</h2>
+<h2 id="parallel-computing">Parallel Computing</h2>
+<p>In parallel computing, execution occurs at the same physical instant: for example, on separate processors of a multi-processor machine, with the goal of speeding up computations - parallel computing is impossible on a (one-core) single processor, as only one computation can occur at any instant.</p>
+<p>Parallel computing is a type of computation in which many calculations or the execution of processes are carried out concurrently. Large problems can often be divided into smaller ones, which can then be solved at the same time.</p>
+<h2 id="concurrency">Concurrency</h2>
+<p>Concurrent programs handle tasks that are all in progress at the same time, but is only necessary to work briefly and separately on each task. so the work can be interleaved in whatever order the tasks require.</p>
+<p>Concurrent computing consists of process lifetimes overlapping, but execution need not happen at the same instant. The goal here is to model processors in the outside world that happen concurrently, such as multiple clients accessing a server at the same time.</p>
+
+    </body>
+    </html>

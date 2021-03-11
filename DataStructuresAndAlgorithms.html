@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Study File for Data Structures and Algorithms</title>
+        <style>
+/* From extension zhuangtongfa.material-theme */
+
+
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="study-file-for-data-structures-and-algorithms">Study File for Data Structures and Algorithms</h1>
+<p><a href="index.html">Go back to index</a></p>
+<ul>
+<li><a href="#study-file-for-data-structures-and-algorithms">Study File for Data Structures and Algorithms</a></li>
+<li><a href="#big-o">Big O</a>
+<ul>
+<li><a href="#o1">O(1)</a></li>
+<li><a href="#ologn">O(log(N))</a></li>
+<li><a href="#n">()(N)</a></li>
+<li><a href="#olognn">O(log(N)*N)</a></li>
+<li><a href="#on">O(N²)</a></li>
+<li><a href="#o2n">O(2^N)</a></li>
+<li><a href="#on-1">O(N!)</a></li>
+</ul>
+</li>
+<li><a href="#data-structures">Data Structures</a>
+<ul>
+<li><a href="#arrays">Arrays</a></li>
+<li><a href="#hash-tables">Hash Tables</a></li>
+<li><a href="#linked-lists">Linked Lists</a></li>
+<li><a href="#stacks--queues">Stacks + Queues</a></li>
+<li><a href="#trees">Trees</a></li>
+<li><a href="#graph">Graph</a></li>
+</ul>
+</li>
+<li><a href="#algorithms">Algorithms</a>
+<ul>
+<li><a href="#sorting">Sorting</a></li>
+<li><a href="#searching">Searching</a></li>
+<li><a href="#dynamic-programming">Dynamic Programming</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="big-o">Big O</h1>
+<ul>
+<li>
+<p>Big O is a mathematical notation that describes the limiting behavior of a funcion when arguments tend towards a particular value or infinity. Big O is also known as asymptotic notation.</p>
+</li>
+<li>
+<p>In Computer Science, big O notation is used to classify algorithms according to how their run time or space requirements grow as the input size grows.</p>
+</li>
+<li>
+<p>Big O notation characterizes functions according to their growth rates: Different functions with the same growth rate may be represented with the same O notation.</p>
+</li>
+<li>
+<p>Big O specifically describes the <strong>Worst Case</strong> scenario.</p>
+</li>
+<li>
+<p>Having a Big O that scales slowly is very important, because it means your code is very scalable.</p>
+<ul>
+<li>Scalable means that your system can grow to process much more data without such a huge increase in cost.</li>
+</ul>
+</li>
+</ul>
+<h2 id="o1">O(1)</h2>
+<p>This is the most simple example, and the fastest algorithm possible.
+It occurs when no loop occurs, meaning that the code is going to be executed only once.
+Many things are O(1), here are some examples:</p>
+<ul>
+<li>Operations (+, -, *, /)</li>
+<li>Comparisons (&lt;, &gt;, ==)</li>
+<li>Function call</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Example of O(1)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReallyFast</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-keyword">static</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// This if is O(1) and calling the method is too</span>
+        <span class="hljs-keyword">if</span> (Greater())
+        {
+            <span class="hljs-comment">//  Calling Console.WriteLine() is considered O(1)</span>
+            Console.WriteLine(<span class="hljs-string">&quot;a is greater&quot;</span>);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Greater</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b</span>)</span>
+    {
+        <span class="hljs-comment">// This comparison is O(1)</span>
+        <span class="hljs-keyword">return</span> a &gt; b;
+    }
+}
+</div></code></pre>
+<h2 id="ologn">O(log(N))</h2>
+<p>This one is a bit more complex, and the</p>
+<h2 id="n">()(N)</h2>
+<h2 id="olognn">O(log(N)*N)</h2>
+<h2 id="on">O(N²)</h2>
+<h2 id="o2n">O(2^N)</h2>
+<h2 id="on-1">O(N!)</h2>
+<h1 id="data-structures">Data Structures</h1>
+<h2 id="arrays">Arrays</h2>
+<h2 id="hash-tables">Hash Tables</h2>
+<h2 id="linked-lists">Linked Lists</h2>
+<h2 id="stacks--queues">Stacks + Queues</h2>
+<h2 id="trees">Trees</h2>
+<h2 id="graph">Graph</h2>
+<h1 id="algorithms">Algorithms</h1>
+<h2 id="sorting">Sorting</h2>
+<h2 id="searching">Searching</h2>
+<h2 id="dynamic-programming">Dynamic Programming</h2>
+
+    </body>
+    </html>

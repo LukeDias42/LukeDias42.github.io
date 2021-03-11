@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Design Patterns</title>
+        <style>
+/* From extension zhuangtongfa.material-theme */
+
+
+
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <ul>
+<li><a href="#design-patterns">Design Patterns</a>
+<ul>
+<li><a href="#solid">SOLID</a>
+<ul>
+<li><a href="#single-responsability-principle"><strong>Single Responsability Principle</strong></a></li>
+<li><a href="#open-closed-principle"><strong>Open-Closed Principle</strong></a></li>
+<li><a href="#liskov-substitution-principle"><strong>Liskov Substitution Principle</strong></a></li>
+<li><a href="#interface-segregation-principle"><strong>Interface Segregation Principle</strong></a></li>
+<li><a href="#dependency-injection-principle"><strong>Dependency Injection Principle</strong></a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</li>
+<li><a href="#gamma-categorization">Gamma Categorization</a></li>
+</ul>
+</li>
+<li><a href="#creational-patterns">Creational Patterns</a>
+<ul>
+<li><a href="#builder">Builder</a>
+<ul>
+<li><a href="#fluent-builder">Fluent Builder</a>
+<ul>
+<li><a href="#fluent-builder-inheritance-with-recursive-generics">Fluent builder Inheritance with Recursive Generics</a></li>
+</ul>
+</li>
+<li><a href="#functional-builder">Functional Builder</a>
+<ul>
+<li><a href="#generic-functional-builder">Generic Functional Builder</a></li>
+</ul>
+</li>
+<li><a href="#faceted-builder">Faceted Builder</a></li>
+</ul>
+</li>
+<li><a href="#factories">Factories</a>
+<ul>
+<li><a href="#factory-method">Factory Method</a></li>
+<li><a href="#asynchronous-factory-method">Asynchronous Factory Method</a></li>
+<li><a href="#factory">Factory</a>
+<ul>
+<li><a href="#inner-factory">Inner Factory</a></li>
+</ul>
+</li>
+<li><a href="#abstract-factory">Abstract Factory</a>
+<ul>
+<li><a href="#abstract-factory-and-ocp">Abstract Factory and OCP</a></li>
+</ul>
+</li>
+<li><a href="#summary-1">Summary</a></li>
+</ul>
+</li>
+<li><a href="#prototype">Prototype</a>
+<ul>
+<li><a href="#the-problems-with-icloneable">The Problems with ICloneable</a></li>
+<li><a href="#copy-constructors">Copy Constructors</a></li>
+</ul>
+</li>
+<li><a href="#singleton">Singleton</a></li>
+</ul>
+</li>
+<li><a href="#structural-patterns">Structural Patterns</a>
+<ul>
+<li><a href="#adapter">Adapter</a></li>
+<li><a href="#bridge">Bridge</a></li>
+<li><a href="#composite">Composite</a></li>
+<li><a href="#decorator">Decorator</a></li>
+<li><a href="#fa%C3%A7ade">Façade</a></li>
+<li><a href="#flyweight">Flyweight</a>
+<ul>
+<li><a href="#repeating-user-names-example">Repeating User Names Example</a></li>
+<li><a href="#text-formatting-example">Text Formatting Example</a></li>
+</ul>
+</li>
+<li><a href="#proxy">Proxy</a></li>
+</ul>
+</li>
+<li><a href="#behavioral-patterns">Behavioral Patterns</a>
+<ul>
+<li><a href="#chain-of-responsability">Chain of Responsability</a></li>
+<li><a href="#command">Command</a>
+<ul>
+<li><a href="#composite-command">Composite Command</a></li>
+<li><a href="#summary-2">Summary</a></li>
+</ul>
+</li>
+<li><a href="#interpreter">Interpreter</a></li>
+<li><a href="#iterator">Iterator</a></li>
+<li><a href="#mediator">Mediator</a></li>
+<li><a href="#memento">Memento</a></li>
+<li><a href="#null-object">Null Object</a></li>
+<li><a href="#observer">Observer</a></li>
+<li><a href="#state">State</a></li>
+<li><a href="#strategy">Strategy</a></li>
+<li><a href="#template-method">Template Method</a></li>
+<li><a href="#visitor">Visitor</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="design-patterns">Design Patterns</h1>
+<h2 id="solid">SOLID</h2>
+<p>SOLID is a group of five Principles that are very important for object-oriented programming, since they help you build more flexible and scalable code.</p>
+<h3 id="single-responsability-principle"><a href="https://medium.com/@learnstuff.io/single-responsibility-principle-ad3ae3e264bb"><strong>Single Responsability Principle</strong></a></h3>
+ <img alt="Single Responsability Principle" height="240px" src="https://miro.medium.com/max/2732/1*UhvaCg9qOCYZyDJZh180hQ.png"/>
+<pre><code><code><div>A class should have one and only one reason to change, meaning that a class should have only one job.
+</div></code></code></pre>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Journal</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">string</span>&gt; entries</span> = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">AddEntry</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> text</span>)</span>
+    {
+        entries.Add(<span class="hljs-string">$&quot;<span class="hljs-subst">{++count}</span>: <span class="hljs-subst">{text}</span>&quot;</span>);
+        <span class="hljs-keyword">return</span> count;
+    }
+ 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RemoveEntry</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> index</span>)</span>
+    {
+        entries.RemoveAt(index);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">string</span>.Join(Environment.NewLine, entries);
+    }
+
+    <span class="hljs-comment">// Here the class gains more than one responsability</span>
+    <span class="hljs-comment">// Not only it has to take care of all the Journal entries implementation</span>
+    <span class="hljs-comment">// But it also has the responsability to manage the file in which it will be saved/loaded (called persistence)</span>
+    <span class="hljs-comment">// Instead of doing this you should follow the Single Responsability Principle and have another class to deal with the persistence</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Save</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> fileName</span>)</span>{
+        FileWriteAllText(fileName, ToString());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Journal <span class="hljs-title">Load</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> fileName</span>)</span>
+    {
+        <span class="hljs-comment">// Loads the journal</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Load</span>(<span class="hljs-params">Uri uri</span>)</span>
+    {
+        <span class="hljs-comment">// Loads from an URI</span>
+    }
+}
+
+<span class="hljs-comment">// Better way to deal with Persistence</span>
+<span class="hljs-comment">// This creates a separation of concerns, the Journal class is concerned with keeping entries</span>
+<span class="hljs-comment">// And the Persistence class in concerned with persistence those entries in a file</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Persistence</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SaveToFile</span>(<span class="hljs-params">Journal j, <span class="hljs-keyword">string</span> fileName, <span class="hljs-keyword">bool</span> overwrite = <span class="hljs-literal">false</span></span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (overwrites || !File.Exists(fileName))
+            File.WriteAllText(fileName, j.ToString());
+    }
+}
+
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> j = <span class="hljs-keyword">new</span> Jornal();
+        j.AddEntry(<span class="hljs-string">&quot;I cried today&quot;</span>);
+        j.AddEntry(<span class="hljs-string">&quot;I ate a bug...&quot;</span>);
+        Console.WriteLine(j);
+
+        <span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> Persistence();
+        <span class="hljs-keyword">var</span> fileName = <span class="hljs-string">&quot;some file path&quot;</span>;
+        p.SaveToFile(j, fileName, <span class="hljs-literal">true</span>);
+        Process.Start(fileName);
+    }
+}
+</div></code></pre>
+<h3 id="open-closed-principle"><a href="https://medium.com/@learnstuff.io/open-close-principle-442ebafb3528"><strong>Open-Closed Principle</strong></a></h3>
+ <img alt="Open-Closed Principle" height="240px" src="http://www.cs.sjsu.edu/faculty/pearce/modules/lectures/ood/principles/ocp_files/image002.jpg"/>
+<pre><code><code><div>Objects or entities should be open for extension but closed for modification.
+</div></code></code></pre>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Color
+{
+    Red, Green, Blue
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Size
+{
+    Small, Medium, Large, Huge
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Product</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
+    <span class="hljs-keyword">public</span> Color Color;
+    <span class="hljs-keyword">public</span> Size size;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Product</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name, Color color, Size size</span>)</span>
+    {
+        <span class="hljs-keyword">if</span>  (name == <span class="hljs-literal">null</span>)
+        {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(name));
+        }
+        Name = name;
+        Color = color;
+        Size = size;
+    }
+}
+
+<span class="hljs-comment">// This is breaking the open-closed principle</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductFilter</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;Product&gt; <span class="hljs-title">FilterBySize</span>(<span class="hljs-params">IEnumerable&lt;Product&gt; products, Size size</span>)</span>
+    {
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> products)
+            <span class="hljs-keyword">if</span> (p.Size == size)
+                <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> p;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;Product&gt; <span class="hljs-title">FilterByColor</span>(<span class="hljs-params">IEnumerable&lt;Product&gt; products, Color color</span>)</span>
+    {
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> products)
+            <span class="hljs-keyword">if</span>(p.Color == color) 
+                <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> p;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;Product&gt; <span class="hljs-title">FilterBySizeAndColor</span>(<span class="hljs-params">IEnumerable&lt;Product&gt; products, Color color, Size size</span>)</span>
+    {
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> products)
+            <span class="hljs-keyword">if</span>(p.Color == color &amp;&amp; p.Size == size) 
+                <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> p;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ISpecification</span>&lt;<span class="hljs-title">T</span>&gt;
+{
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">IsSatisfied</span>(<span class="hljs-params">T t</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFilter</span>&lt;<span class="hljs-title">T</span>&gt;
+{
+    <span class="hljs-function">IEnumerable&lt;T&gt; <span class="hljs-title">Filter</span>(<span class="hljs-params">IEnumerable&lt;T&gt; items, ISpecification&lt;T&gt; spec</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ColorSpecification</span> : <span class="hljs-title">ISpecification</span>&lt;<span class="hljs-title">Product</span>&gt;
+{
+    <span class="hljs-keyword">private</span> Color _color;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ColorSpecification</span>(<span class="hljs-params">Color color</span>)</span>
+    {
+        _color = color;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">IsSatisfied</span>(<span class="hljs-params">Product t</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> t.Color == _color;
+    } 
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SizeSpecification</span> : <span class="hljs-title">ISpecification</span>&lt;<span class="hljs-title">Product</span>&gt;
+{
+    <span class="hljs-keyword">private</span> Size _size;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SizeSpecification</span>(<span class="hljs-params">Size size</span>)</span>
+    {
+        _size = size;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">IsSatisfied</span>(<span class="hljs-params">Product t</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> t.Size == _size;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AndSpecification</span>&lt;<span class="hljs-title">T</span>&gt; : <span class="hljs-title">ISpecification</span>&lt;<span class="hljs-title">T</span>&gt;
+{
+    <span class="hljs-keyword">private</span> ISpecification&lt;T&gt; _first, _second;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AndSpecification</span>(<span class="hljs-params">ISpecification&lt;T&gt; first, ISpecification&lt;T&gt; second</span>)</span>
+    {
+        _first = first ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(first));
+        _second = second ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(second));
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">IsSatisfied</span>(<span class="hljs-params">T t</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> first.IsSatisfied(t) &amp;&amp; second.IsSatisfied(t);
+    }
+
+}
+
+<span class="hljs-comment">// You will never have to enter this class again to modify it, since you can send any specification through it</span>
+<span class="hljs-comment">// This way it is closed for modification</span>
+<span class="hljs-comment">// However, since you can always create more classes that implements ISpecification, it is open for extension</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BetterFilter</span> : <span class="hljs-title">IFilter</span>&lt;<span class="hljs-title">Product</span>&gt;
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;Product&gt; <span class="hljs-title">Filter</span>(<span class="hljs-params">IEnumerable&lt;Product&gt; items, ISpecification&lt;Product&gt; spec</span>)</span>
+    {
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> i <span class="hljs-keyword">in</span> items)
+            <span class="hljs-keyword">if</span> (spec.IsSatisfied(i))
+                <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> i;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> apple = <span class="hljs-keyword">new</span> Product(<span class="hljs-string">&quot;Apple&quot;</span>, Color.Green, Size.Small);
+        <span class="hljs-keyword">var</span> tree = <span class="hljs-keyword">new</span> Product(<span class="hljs-string">&quot;Tree&quot;</span>, Color.Green, Size.Large);
+        <span class="hljs-keyword">var</span> house = <span class="hljs-keyword">new</span> Product(<span class="hljs-string">&quot;House&quot;</span>, Color.Blue, Size.Large);
+
+        Product[] products = {apple, tree, house};
+
+        <span class="hljs-comment">// Not using the open-closed principle, you have to use a specific filter from the ProductFilter class</span>
+        <span class="hljs-comment">// in order to filter something</span>
+        <span class="hljs-keyword">var</span> pf = <span class="hljs-keyword">new</span> ProductFilter();
+        WriteLine(<span class="hljs-string">&quot;Green products (old): &quot;</span>);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> pf.FilterByColor(products, Color.Green)){
+            WriteLine(<span class="hljs-string">$&quot; - <span class="hljs-subst">{p.Name}</span> is green&quot;</span>);
+        }
+
+        <span class="hljs-keyword">var</span> bf = <span class="hljs-keyword">new</span> BetterFilter();
+        WriteLine(<span class="hljs-string">&quot;Green Products (new): &quot;</span>);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> bf.Filter(products, <span class="hljs-keyword">new</span> ColorSpecification(Color.Green))
+        {
+            WriteLine(<span class="hljs-string">$&quot; - <span class="hljs-subst">{p.Name}</span> is green&quot;</span>);
+        }
+
+        <span class="hljs-comment">// Using open-closed principle</span>
+        <span class="hljs-comment">// This way you can have as many filters as you want on the same list</span>
+        <span class="hljs-comment">// You can also create a class that recieves a list of specifications, instead of only having two</span>
+        WriteLine(<span class="hljs-string">&quot;Large Blue Products: &quot;</span>);
+        <span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> bf.Filter(product, 
+                    <span class="hljs-keyword">new</span> AndSpecification&lt;Product&gt;(
+                        <span class="hljs-keyword">new</span> ColorSpecification(Color.Blue),
+                         <span class="hljs-keyword">new</span> SizeSpecification(Size.Large))))
+        {
+            WriteLine(<span class="hljs-string">$&quot; - <span class="hljs-subst">{p.Name}</span> is Large and Blue&quot;</span>);
+        }
+    }
+}
+</div></code></pre>
+<h3 id="liskov-substitution-principle"><a href="https://medium.com/@learnstuff.io/liskov-substitution-principle-ad0d6a51ffb0"><strong>Liskov Substitution Principle</strong></a></h3>
+ <img alt="Liskov Substitution Principle" height="240px" src="https://miro.medium.com/max/1050/1*iV_TeHoEDE0TwhQEFj2fxA.png"/>
+<pre><code><code><div>Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T.
+Or -&gt; You should be able to substitute a base for a subtype. 
+</div></code></code></pre>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Rectangle</span>
+{
+    <span class="hljs-comment">// This is the wrong way of doing it if you desire to override it&#x27;s behavior on a child class</span>
+    <span class="hljs-comment">// public int Width { get; set; }</span>
+    <span class="hljs-comment">// public int Height { get; set; }</span>
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">int</span> Width { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">int</span> Height { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Rectangle</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height</span>)</span>
+    {
+        Width = width;
+        Height = height;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Width)}</span>: <span class="hljs-subst">{Width}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>{Height}</span>: <span class="hljs-subst">{Height}</span>}&quot;</span>;
+    }
+}
+
+<span class="hljs-comment"><span class="hljs-doctag">///</span> Instead of using the new keyword, if you wish to have a child class of Rectangle with different behavior,</span>
+<span class="hljs-comment">// you should use the virtual keyword on the values you wish to change the behavior of</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> : <span class="hljs-title">Rectangle</span>
+{
+    <span class="hljs-comment">// public new int Width</span>
+    <span class="hljs-comment">// {</span>
+    <span class="hljs-comment">//     set { base.Width = base.Height = value; }</span>
+    <span class="hljs-comment">// }</span>
+
+    <span class="hljs-comment">// public new int Height</span>
+    <span class="hljs-comment">// {</span>
+    <span class="hljs-comment">//     set { base.Height = base.Width = value; }</span>
+    <span class="hljs-comment">// }</span>
+
+
+    <span class="hljs-comment">// By using the virtual and override keyword, when you create a instace of type Rectangle with a reference to a Square type</span>
+    <span class="hljs-comment">// The compiler will check and see that the values are virtual and then search their actual implementation and the child class</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">int</span> Width
+    {
+        <span class="hljs-keyword">set</span> { <span class="hljs-keyword">base</span>.Width = <span class="hljs-keyword">base</span>.Height = <span class="hljs-keyword">value</span>; }
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">int</span> Height
+    {
+        <span class="hljs-keyword">set</span> { <span class="hljs-keyword">base</span>.Height = <span class="hljs-keyword">base</span>.Width = <span class="hljs-keyword">value</span>; }
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Area</span>(<span class="hljs-params">Rectangle rec</span>)</span> =&gt; rec.Width * rec.Height;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> rec = <span class="hljs-keyword">new</span> Rectangle(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
+        Console.WriteLine(<span class="hljs-string">$&quot;<span class="hljs-subst">{rec}</span> has area <span class="hljs-subst">{Area(rec)}</span>&quot;</span>);
+    }
+}
+</div></code></pre>
+<h3 id="interface-segregation-principle"><a href="https://medium.com/@learnstuff.io/interface-segregation-principle-dd885e59aec9"><strong>Interface Segregation Principle</strong></a></h3>
+ <img alt="Interface Segregation Principle" height="240px" src="https://miro.medium.com/max/1050/1*YzBpqn1XSHOz9UpKc6HcJg.png"/>
+<pre><code><code><div>A client should never be forced to implement an interface that it doesn’t use.
+Or clients shouldn’t be forced to depend on methods they do not use.
+</div></code></code></pre>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Document</span>
+{
+
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IMachine</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params">Document doc</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Scan</span>(<span class="hljs-params">Document doc</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Fax</span>(<span class="hljs-params">Document doc</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MultifunctionPrinter</span> : <span class="hljs-title">IMachine</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Scan</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Fax</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+}
+
+<span class="hljs-comment">// This breaks the Interface segregation principle, because it is forcing you to implement methods that aren&#x27;t going to be used</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PrintOnlyPrinter</span> : <span class="hljs-title">IMachine</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Scan</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// This printer does not have the Scan capability, however the interface forces the class to implement it</span>
+        <span class="hljs-comment">// So you need to throw an error, or create a no-op, however you don&#x27;t want methods without implementation on your classes</span>
+    }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Fax</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements nothing...</span>
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IPrinter</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params">Document doc</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IScanner</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Scan</span>(<span class="hljs-params">Document doc</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFax</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Fax</span>(<span class="hljs-params">Document doc</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Photocopier</span> : <span class="hljs-title">IPrinter</span>, <span class="hljs-title">IScanner</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Scanner</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IMultiFunctionDevice</span> : <span class="hljs-title">IScanner</span>, <span class="hljs-title">IPrinter</span>, <span class="hljs-title">IFax</span>
+{
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MultiFunctionMachine</span> : <span class="hljs-title">IMultifunctionDevice</span>
+{
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Scan</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Fax</span>(<span class="hljs-params">Document doc</span>)</span>
+    {
+        <span class="hljs-comment">// Implements something</span>
+    }
+}
+</div></code></pre>
+<h3 id="dependency-injection-principle"><a href="https://medium.com/@learnstuff.io/dependency-inversion-principle-aafa06af26b4"><strong>Dependency Injection Principle</strong></a></h3>
+<img alt="Dependency Injection Principle" height="240px" src="https://miro.medium.com/max/1050/1*b6EH_TCw1gEvhGe8eT4VTg.png"/>
+<pre><code><code><div>Entities must depend on abstractions, not on concretions. 
+It states that the high-level module must not depend on the low-level module,
+but they should depend on abstractions.
+
+Or -&gt; high level parts of the system should not depend on low level part of the system directly,
+ instead it should depend on some sort of abstration
+</div></code></code></pre>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Relationship
+{
+    Parent,
+    Child,
+    Sibling
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Relationships</span> : <span class="hljs-title">IRelationshipBrowser</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">List</span>&lt;(<span class="hljs-title">Person</span>, <span class="hljs-title">RelationShip</span>, <span class="hljs-title">Person</span>)&gt; _relations</span> = <span class="hljs-keyword">new</span> List&lt;(Person, Relationship, Person)&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddParentAndChild</span>(<span class="hljs-params">Person, parent, Person child</span>)</span>
+    {
+        _relations.Add(parent, RelationShip.Parent, child);
+        _relations.Add(child, RelationShip.Child, Parent);
+    }
+
+     <span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;Person&gt; <span class="hljs-title">FindAllChildrenOf</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span>
+     {
+         <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> r <span class="hljs-keyword">in</span> relations.Where(
+             x =&gt; x.Item1.Name -- name &amp;&amp;
+             x.Item2 == Relationship.Parent
+         ))
+         {
+             <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> r.Item3;
+         }
+     }
+
+   <span class="hljs-comment">// public List&lt;(Person, Relationship, Person)&gt; Relations =&gt; relations;</span>
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Research</span>
+{
+
+    <span class="hljs-comment">// The problem is that we are accessing a very low level part of the Relationship class, we are accessing its data store</span>
+    <span class="hljs-comment">// And accessing it through a specific design, which exposes the private field as public.</span>
+    <span class="hljs-comment">// And the Relationship class should not change its way of storing relationships, because if it does change, it will break this</span>
+    <span class="hljs-comment">// Research class</span>
+    <span class="hljs-comment">// public Research(Relationships relationships)</span>
+    <span class="hljs-comment">// {</span>
+    <span class="hljs-comment">//     var relations = relationships.Relations;</span>
+    <span class="hljs-comment">//     foreach (var r in relations.Where(</span>
+    <span class="hljs-comment">//         x =&gt; x.Item1.Name == &quot;Zeus&quot; &amp;&amp;</span>
+    <span class="hljs-comment">//                 x.Item2 == Relationship.Parent</span>
+    <span class="hljs-comment">//     ))</span>
+    <span class="hljs-comment">//     {</span>
+    <span class="hljs-comment">//         Console.WriteLine($&quot;Zeus has a child called {r.Item3.Name}&quot;);</span>
+    <span class="hljs-comment">//     }</span>
+    <span class="hljs-comment">// }</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Research</span>(<span class="hljs-params">IRelationshipBrowser browser</span>)</span>
+    {
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> browser.FindAllChilderOf(<span class="hljs-string">&quot;Zeus&quot;</span>))
+                Console.WriteLine(<span class="hljs-string">$&quot;Zeus has a child called <span class="hljs-subst">{p.Name}</span>&quot;</span>);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IRelationshipBrowser</span>
+{
+    <span class="hljs-function">IEnumerable&lt;Person&gt; <span class="hljs-title">FindAllChildrenOf</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> parent = <span class="hljs-keyword">new</span> Person { Name = <span class="hljs-string">&quot;Zeus&quot;</span> };
+        <span class="hljs-keyword">var</span> child1 = <span class="hljs-keyword">new</span> Person { Name = <span class="hljs-string">&quot;Afrodite&quot;</span> };
+        <span class="hljs-keyword">var</span> child2 = <span class="hljs-keyword">new</span> Person { Name = <span class="hljs-string">&quot;Apolo&quot;</span> };
+
+        <span class="hljs-keyword">var</span> rel = <span class="hljs-keyword">new</span> Relationships();
+        rel.AddParentAndChild(parent, child1);
+        rel.AddParentAndChild(parent, child2);
+
+        <span class="hljs-keyword">var</span> res = <span class="hljs-keyword">new</span> Research(rel);
+    }
+}
+</div></code></pre>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Single Responsability Principle
+<ul>
+<li>A class should only have one reason to change</li>
+<li>Separation of concerns - different classes handling different, independent taks/problems</li>
+</ul>
+</li>
+<li>Open-Closed Principle
+<ul>
+<li>Classes should be open for extension but closed for modification</li>
+</ul>
+</li>
+<li>Liskov Substitution Principle
+<ul>
+<li>You should be able to substitute a base type for a subtype</li>
+</ul>
+</li>
+<li>Interface Segregation Principle
+<ul>
+<li>Don't put too much into an interface; split into separate interface</li>
+<li>YAGNI - You Ain't Going to Need It</li>
+</ul>
+</li>
+<li>Dependency Injection Principle
+<ul>
+<li>High-level modules should not depend upon low-level ones; use abstractions.</li>
+</ul>
+</li>
+</ul>
+<h2 id="gamma-categorization">Gamma Categorization</h2>
+<ul>
+<li>
+<p>Design Patterns are Typically into three categories</p>
+</li>
+<li>
+<p>This is called Gamma Categorization after Erich Gamma, one of the GoF authors</p>
+</li>
+<li>
+<p><strong>Creational Patterns</strong></p>
+<ul>
+<li>Deal with the creation (construction) of objects</li>
+<li>Explicit (constructor) vs. implicit (DI, reflection, etc.)</li>
+<li>Wholesale (single statement) vs. piecewise (step-by-step)</li>
+</ul>
+</li>
+<li>
+<p><strong>Structural Patterns</strong></p>
+<ul>
+<li>Concerned with the structure (e.g. class members)</li>
+<li>Many patterns are wrappers that mimic the underlying class' interface</li>
+<li>Stress the importance of good API Design</li>
+</ul>
+</li>
+<li>
+<p><strong>Behavioral Patterns</strong></p>
+<ul>
+<li>They are all different; They have no central theme.</li>
+</ul>
+</li>
+</ul>
+<h1 id="creational-patterns">Creational Patterns</h1>
+<h2 id="builder"><a href="https://refactoring.guru/design-patterns/builder">Builder</a></h2>
+<img alt="Builder Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/builder/builder-en-2x.png"/>
+<ul>
+<li>
+<p>Motivation</p>
+<ul>
+<li>Some objects are simple and can be created in a single constructor call</li>
+<li>Other objects require a lot of ceremony to create</li>
+<li>Having an object with 10 contructor arguments is not productive</li>
+<li>Instead, opt for piecewise contruction</li>
+<li>Builder provides an API for constructing an object step-by-step</li>
+</ul>
+</li>
+<li>
+<p>Example without using Builder</p>
+</li>
+</ul>
+<pre><code class="language-C#"><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-comment">// The problem here is that we are building an HTML without the correct formating </span>
+    <span class="hljs-comment">// Something that could be on a separate class</span>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> hello = <span class="hljs-string">&quot;hello&quot;</span>
+        <span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder();
+        sb.Append(<span class="hljs-string">&quot;&lt;p&gt;&quot;</span>);
+        sb.Append(hello);
+        sb.Append(<span class="hljs-string">&quot;&lt;/p&gt;&quot;</span>);
+        Console.WriteLine(sb);
+
+        <span class="hljs-keyword">var</span> words = <span class="hljs-keyword">new</span>[] {<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>};
+        sb.Clear();
+        sb.Append(<span class="hljs-string">&quot;&lt;ul&gt;&quot;</span>)/
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> word <span class="hljs-keyword">in</span> words)
+        {
+            sb.AppendFormat(&lt;li&gt;{<span class="hljs-number">0</span>}&lt;/li&gt;<span class="hljs-string">&quot;, word)
+        }
+        sb.Append(&quot;</span>&lt;/ul&gt;<span class="hljs-string">&quot;);
+        Console.WriteLine(sb);
+    }
+}
+</span></div></code></pre>
+<ul>
+<li>Now using the Builder to construct the HTML</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HtmlElement</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name, Text;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">HtmlElement</span>&gt; Elements</span> = <span class="hljs-keyword">new</span> List&lt;HtmlElement&gt;();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> indentSize = <span class="hljs-number">2</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HtmlElement</span>(<span class="hljs-params"></span>)</span> {}
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HtmlElement</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name, <span class="hljs-keyword">string</span> text</span>)</span>
+    {
+        Name  = name ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(name));
+        Text = text ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(text));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToStringImpl</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> indent</span>)</span>{
+        <span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-keyword">var</span> i = <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>(<span class="hljs-string">&#x27; &#x27;</span>, indentSize * indent);
+        sb.Append(<span class="hljs-string">$&quot;<span class="hljs-subst">{i}</span>&lt;<span class="hljs-subst">{name}</span>&gt;&quot;</span>);
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">string</span>.IsNullOrWhiteSpace(Text))
+        {
+            sb.Append(<span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>(<span class="hljs-string">&#x27; &#x27;</span>, indentSize * (indent + <span class="hljs-number">1</span>)));
+            sb.AppendLine(Text);
+        }
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> e <span class="hljs-keyword">in</span> Elements)
+        {
+            sb.Append(e.ToStringImpl(indent + <span class="hljs-number">1</span>));
+        }
+        sb.AppendLine(<span class="hljs-string">$&quot;<span class="hljs-subst">{i}</span>&lt;/<span class="hljs-subst">{name}</span>&gt;&quot;</span>);
+        <span class="hljs-keyword">return</span> sb.ToString();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> ToStringImpl(<span class="hljs-number">0</span>);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HtmlBuilder</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">string</span> _rootName;
+    HtmlElement root = <span class="hljs-keyword">new</span> HtmlElement();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HtmlBuilder</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> rootName</span>)</span>
+    {
+        _rootName = rootName;
+        root.Name = rootName;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> HtmlBuilder <span class="hljs-title">AddChild</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> childName, <span class="hljs-keyword">string</span> childText</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> e = <span class="hljs-keyword">new</span> HtmlElement(childName, <span class="hljs-keyword">string</span> childText);
+        root.Elements.Add(e);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> root.ToString();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Clear</span>(<span class="hljs-params"></span>)</span>
+    {
+        root = <span class="hljs-keyword">new</span> HtmlElement()
+    }
+}
+
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+            <span class="hljs-keyword">var</span> builder =  <span class="hljs-keyword">new</span> HtmlBuilder(<span class="hljs-string">&quot;ul&quot;</span>);
+            builder.AddChild(<span class="hljs-string">&quot;li&quot;</span>, <span class="hljs-string">&quot;Hello&quot;</span>)
+                       .AddChild(<span class="hljs-string">&quot;li&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>);
+
+            Console.WriteLine(builder);
+    }
+}
+</div></code></pre>
+<h3 id="fluent-builder">Fluent Builder</h3>
+<ul>
+<li>When a builder returns the object its doing the operation on, you can chain calls for the builder method, this is called fluent builder.</li>
+</ul>
+<h4 id="fluent-builder-inheritance-with-recursive-generics"><a href="https://code-maze.com/fluent-builder-recursive-generics/">Fluent builder Inheritance with Recursive Generics</a></h4>
+<p>The problem of inheriting Fluent Builders, is that when you call a method from a parent class, it doest not return the builder type you created the variable with. And when this happen, you can't use the child class's methods anymore.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonInfoBuilder</span>
+{  
+    <span class="hljs-keyword">protected</span> Person person = <span class="hljs-keyword">new</span> Person();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonInfoBuilder <span class="hljs-title">Called</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span>
+    {
+        person.Name = name;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+}
+
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonJobBuilder</span> : <span class="hljs-title">PersonInfoBuilder</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonJobBuilder <span class="hljs-title">WorkAsA</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> position</span>)</span>
+    {
+        person.Position = position;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// The problem here ia that when you call the method Called, it will return a PersonInfoBuilder,</span>
+        <span class="hljs-comment">// and then you are trying to call the method WorkAsA in an object that does not have that method, because it is of type</span>
+        <span class="hljs-comment">// PersonInfoBuilder instead of PersonJobBuilder. And thus, you need to use something to be sure that PersonInfoBuilder will</span>
+        <span class="hljs-comment">// return its child, and not itself</span>
+        <span class="hljs-keyword">var</span> builder = <span class="hljs-keyword">new</span> PersonJobBuilder();
+        builder.Called(<span class="hljs-string">&quot;Luke&quot;</span>)
+                    .WorkAsA(<span class="hljs-string">&quot;Developer&quot;</span>);
+    }
+}
+</div></code></pre>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Position;
+
+
+    <span class="hljs-comment">// Here we create this Builder API in order to use the Builders without the need to instantiate it somehere, since the SELF type is not very clear</span>
+    <span class="hljs-comment">// So we have this class that inherits from the class that inherits from all other classes</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span> : <span class="hljs-title">PersonJobBuilder</span>&lt;<span class="hljs-title">Builder</span>&gt;
+    {
+
+    }
+
+    <span class="hljs-comment">// And here we are able to create a new Builder everytime we call for new, and since the class Builder can create and return</span>
+    <span class="hljs-comment">// a new Person variable, we can assentialy use the Person class to create as many Persons as we want, using Fluent Builders with Recursive Generics</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Builder New =&gt; <span class="hljs-keyword">new</span> Builder();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Name)}</span>: <span class="hljs-subst">{Name}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Position)}</span>, <span class="hljs-subst">{Position}</span>&quot;</span>;
+    }
+}
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">PersonBuilder</span>
+{
+    <span class="hljs-keyword">protected</span> Person person = <span class="hljs-keyword">new</span> Person();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Person <span class="hljs-title">Build</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> person;
+    }
+}
+
+<span class="hljs-comment">// Called methods need to return a generic type, therefore our calass is generic as well.</span>
+<span class="hljs-comment">// It needs to inherit from the PersonBuilder class because we need that Person object.</span>
+<span class="hljs-comment">// We must also make sure to get the right type fot the SELF type in our class. </span>
+<span class="hljs-comment">// And we can achieve this by restricting our SELF type to the PersonInfoBuilder type;</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonInfoBuilder</span>&lt;<span class="hljs-title">SELF</span>&gt; 
+: <span class="hljs-title">PersonBuilder</span> 
+<span class="hljs-keyword">where</span> <span class="hljs-title">SELF</span> : <span class="hljs-title">PersonInfoBuilder</span>&lt;<span class="hljs-title">SELF</span>&gt;
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> SELF <span class="hljs-title">Called</span>(<span class="hljs-params">String name</span>)</span>
+    {
+        person.Name = name;
+        <span class="hljs-keyword">return</span> (SELF) <span class="hljs-keyword">this</span>;
+    }
+}
+
+<span class="hljs-comment">// We follow the PersonBuilder approach here, so that we can also inherit from this class in the future</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonJobBuilder</span>&lt;<span class="hljs-title">SELF</span>&gt; 
+: <span class="hljs-title">PersonInfoBuilder</span>&lt;<span class="hljs-title">PersonJobBuilder</span>&lt;<span class="hljs-title">SELF</span>&gt;&gt;
+<span class="hljs-keyword">where</span> <span class="hljs-title">SELF</span> : <span class="hljs-title">PersonJobBuilder</span>&lt;<span class="hljs-title">SELF</span>&gt;
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> SELF <span class="hljs-title">WorkAsA</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> position</span>)</span>
+    {
+        person.Position = position;
+        <span class="hljs-keyword">return</span> (SELF) <span class="hljs-keyword">this</span>;
+    }
+}
+
+<span class="hljs-comment">// There is another problem, we can&#x27;t simply create a PersonJobBuilder variable anymore, because it is not clear which type</span>
+<span class="hljs-comment">// SELF should be in this case, so we need a mechanism inside Person in order to work around this problem</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> me = Person.New.Called(<span class="hljs-string">&quot;Luke&quot;</span>).WorkAsA(<span class="hljs-string">&quot;Developer&quot;</span>).Build();
+        Console.WriteLine(me);
+    }
+}
+</div></code></pre>
+<h3 id="functional-builder">Functional Builder</h3>
+<p>When you are trying to create a builder in a more functional setting, it's important to adhere to SOLID principle, so how can we do what we did previously using the Open-Closed Principle</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name, Position;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Name)}</span>: <span class="hljs-subst">{Name}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Position)}</span>: <span class="hljs-subst">{Position}</span>&quot;</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonBuilder</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> List&lt;Func&lt;Person, Person&gt;&gt; actions = 
+    <span class="hljs-keyword">new</span> List&lt;Func&lt;Person, Person&gt;&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Person <span class="hljs-title">Build</span>(<span class="hljs-params"></span>)</span> =&gt;
+        actions.Aggregate(<span class="hljs-keyword">new</span> Person(), (p, f) =&gt; f(p));
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonBuilder <span class="hljs-title">Do</span>(<span class="hljs-params">Action&lt;Person&gt; action</span>)</span> =&gt; AddAction(action);
+
+    <span class="hljs-comment">// The reason why we are taking an Action and turning it into a Func is because </span>
+    <span class="hljs-comment">// we want to preserve the Fluent Builder interface, and the reason why you want</span>
+    <span class="hljs-comment">// to preserve a Fluent interface is because at some point we might want to use</span>
+    <span class="hljs-comment">// the aggregate link method in order to Apply all the funcions one after another</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> PersonBuilder <span class="hljs-title">AddAction</span>(<span class="hljs-params">Action&lt;Person&gt; action</span>)</span>
+    {
+        actions.Add(p =&gt; { action(p); 
+            <span class="hljs-keyword">return</span> p;
+        });
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+}
+
+úblic <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonBuilderExtensions</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> PersonBuilder <span class="hljs-title">Called</span>(<span class="hljs-params"><span class="hljs-keyword">this</span> PersonBuilder builder, <span class="hljs-keyword">string</span> name</span>)</span> 
+        =&gt; builder.Do(p =&gt; p.Name = name);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> PersonBuilder <span class="hljs-title">WorkAsA</span>(<span class="hljs-params"><span class="hljs-keyword">this</span> PersonBuilder builder, <span class="hljs-keyword">string</span> position</span>)</span> 
+        =&gt; builder.Do(p =&gt; p.Name = name);
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> PersonBuilder();
+        <span class="hljs-comment">// This here is adding to the list of Func inside PersonBuilder, and when you use Build, </span>
+        <span class="hljs-comment">// they are going to be called one after another</span>
+        person.Called(<span class="hljs-string">&quot;Luke&quot;</span>).WorkAsA(<span class="hljs-string">&quot;Developer&quot;</span>);
+        Console.WriteLine(person.Build());
+    }
+}
+</div></code></pre>
+<h4 id="generic-functional-builder">Generic Functional Builder</h4>
+<p>As seen before, we can have a sealed builder and use Extension Methods to add different methods to the Builder without breaking the Open-Closed Principle.
+However we could generalize the Builder class in order to reuse the code.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name, Position;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Name)}</span>: <span class="hljs-subst">{Name}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Position)}</span>: <span class="hljs-subst">{Position}</span>&quot;</span>;
+    }
+}
+
+<span class="hljs-comment">// This class is abstract and therefore cannot be instantiated</span>
+<span class="hljs-comment">// When inheriting from this class you can pass the TSubject (class you want to do the operations on)</span>
+<span class="hljs-comment">// And TSelf (The name of the class itself), and then you can use Extension Methods to add</span>
+<span class="hljs-comment">// More actions to the class</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FunctionalBuilder</span>&lt;<span class="hljs-title">TSubject</span>, <span class="hljs-title">TSelf</span>&gt;
+    <span class="hljs-keyword">where</span> <span class="hljs-title">TSelf</span> : <span class="hljs-title">FunctionalBuilder</span>&lt;<span class="hljs-title">TSubject</span>, <span class="hljs-title">TSelf</span>&gt;
+    <span class="hljs-keyword">where</span> <span class="hljs-title">TSubject</span> : <span class="hljs-title">new</span>()
+{   
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> List&lt;Func&lt;TSubject, TSubject&gt;&gt; actions = 
+        <span class="hljs-keyword">new</span> List&lt;Func&lt;TSubject, TSubject&gt;&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TSelf <span class="hljs-title">Do</span>(<span class="hljs-params">Action&lt;TSubject&gt; action</span>)</span>
+        =&gt; AddAction(action);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TSubject <span class="hljs-title">Build</span>(<span class="hljs-params"></span>)</span>
+        =&gt; actions.Aggregate(<span class="hljs-keyword">new</span> TSubject(), (p, f) =&gt; f(p));
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> TSelf <span class="hljs-title">AddAction</span>(<span class="hljs-params">Action&lt;TSubject&gt; action</span>)</span>
+    {
+        actions.Add(p =&gt; { action(p);
+        <span class="hljs-keyword">return</span> p;
+        });
+        <span class="hljs-keyword">return</span> (TSelf) <span class="hljs-keyword">this</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonBuilder</span> 
+    : <span class="hljs-title">FunctionalBuilder</span>&lt;<span class="hljs-title">Person</span>, <span class="hljs-title">PersonBuilder</span>&gt;
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonBuilder <span class="hljs-title">Called</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span>
+        =&gt; Do(p =&gt; p.Name = name);
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonBuilderExtensions</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> PersonBuilder <span class="hljs-title">WorkAsA</span>(<span class="hljs-params"><span class="hljs-keyword">this</span> PersonBuilder builder, <span class="hljs-keyword">string</span> position</span>)</span>
+        =&gt; builder.Do(p =&gt; p.Name = name);
+
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> PersonBuilder();
+        person.Called(<span class="hljs-string">&quot;Luke&quot;</span>)
+        .WorkAsA(<span class="hljs-string">&quot;Developer&quot;</span>);
+        Console.WriteLine(person.Build());
+    }
+}
+</div></code></pre>
+<h3 id="faceted-builder">Faceted Builder</h3>
+<p>Until so far we have only used one builder for each class, however sometimes a class need more than one builder</p>
+<pre><code class="language-C#"><div><span class="hljs-comment">// Since we have multiple field related to different things about a person, it makes sense that we create different Builders,</span>
+<span class="hljs-comment">// Each for a different subject.</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+{
+    <span class="hljs-comment">// address</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> StreetAddress, PostCode, City;
+
+    <span class="hljs-comment">// Empoyment</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> CompanyName, Position;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> AnnualIncome;
+
+    <span class="hljs-comment">// Personal</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> FirstName, LastName;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> Age;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(StreetAddress)}</span>: <span class="hljs-subst">{StreetAddress}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(PostCode)}</span>: <span class="hljs-subst">{PostCode}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(City)}</span>: City \n&quot;</span> +
+                    <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(CompanyName)}</span>: <span class="hljs-subst">{CompanyName}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Position)}</span>: <span class="hljs-subst">{Position}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(AnnualIncome)}</span>: <span class="hljs-subst">{AnnualIncome}</span>\n&quot;</span> +
+                    <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(FirstName)}</span>: <span class="hljs-subst">{FirstName}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(LastName)}</span>: <span class="hljs-subst">{LastName}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Age)}</span>, <span class="hljs-subst">{Age}</span>&quot;</span>;
+
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonBuilder</span> <span class="hljs-comment">//Façade</span>
+{
+    <span class="hljs-keyword">protected</span> Person person = <span class="hljs-keyword">new</span> Person();
+
+    <span class="hljs-keyword">public</span> PersonJobBuilder Works =&gt; <span class="hljs-keyword">new</span> PersonJobBuilder(person);
+    <span class="hljs-keyword">public</span> PersonAddressBuilder Lives =&gt; <span class="hljs-keyword">new</span> PersonAddressBuilder(person);
+    <span class="hljs-keyword">public</span> PersonPersonalBuilder Is =&gt; <span class="hljs-keyword">new</span> PersonPersonalBuilder(person);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">implicit</span> <span class="hljs-keyword">operator</span> <span class="hljs-title">Person</span>(<span class="hljs-params">PersonBuilder pb</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> pb.person;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonAddressBuilder</span> : <span class="hljs-title">PersonBuilder</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PersonAddressBuilder</span>(<span class="hljs-params">Person person</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.person = person;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonAddressBuilder <span class="hljs-title">At</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> streetAddress</span>)</span>{
+        person.StreetAddress = streetAddress;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonAddressBuilder <span class="hljs-title">In</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> city</span>)</span>
+    {
+        person.City = city;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonAddressBuilder <span class="hljs-title">WithPostCode</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> postCode</span>)</span>
+    {
+        person.PostCode = postCode;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonJobBuilder</span> : <span class="hljs-title">PersonBuilder</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PersonJobBuilder</span>(<span class="hljs-params">Person person</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.person = person;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonJobBuilder <span class="hljs-title">At</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> companyName</span>)</span>{
+        person.CompanyName = companyName;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonJobBuilder <span class="hljs-title">AsA</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> position</span>)</span>
+    {
+        person.Position = position;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonJobBuilder <span class="hljs-title">Earning</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        person.AnnualIncome = amount;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonPersonalBuilder</span> : <span class="hljs-title">PersonBuilder</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PersonPersonalBuilder</span>(<span class="hljs-params">Person person</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.person = person;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonPersonalBuilder <span class="hljs-title">Called</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span>
+    {
+        person.FirstName = name;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonPersonalBuilder <span class="hljs-title">CalledLast</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span>
+    {
+        person.LastName = name;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PersonPersonalBuilder <span class="hljs-title">Age</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> age</span>)</span>
+    {
+        person.Age = age;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> pb = <span class="hljs-keyword">new</span> PersonBuilder();
+        Person person = pb
+            .Lives
+                .At(<span class="hljs-string">&quot;Figueiredo Magacães&quot;</span>)
+                .In(<span class="hljs-string">&quot;Rio de Janeiro&quot;</span>)
+                .WithPostCode(<span class="hljs-string">&quot;22141211&quot;</span>)
+            .Works
+                .At(<span class="hljs-string">&quot;Stone&quot;</span>)
+                .AsA(<span class="hljs-string">&quot;Developer&quot;</span>)
+                .Earning(<span class="hljs-number">900000</span>)
+            .Is
+                .Called(<span class="hljs-string">&quot;Luke&quot;</span>)
+                .CalledLast(<span class="hljs-string">&quot;Dias&quot;</span>)
+                .Age(<span class="hljs-number">21</span>);
+    }
+}
+</div></code></pre>
+<h2 id="factories"><a href="https://refactoring.guru/design-patterns/factory-method">Factories</a></h2>
+<img alt="Factory Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/factory-method/factory-method-en-2x.png"/>
+<ul>
+<li>
+<p>Motivations</p>
+<ul>
+<li>Object creating logic becomes too convoluted</li>
+<li>Constructor is not descriptive
+<ul>
+<li>Name mandated by name of containing type</li>
+<li>Cannot overload with same sets of arguments with different names</li>
+<li>Can turn into 'optional parameters hell'</li>
+</ul>
+</li>
+<li>Object creation (non-piecewise, unlike Builder) can be outsourced to
+<ul>
+<li>A separate function (Factory Method)</li>
+<li>That may exist in a separate class (Factory)</li>
+<li>Can create hierarchy of factories with Abstract Factory</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Factory is a component responsible solely for the wholesale (not piecewise) creation of objects.</p>
+</li>
+</ul>
+<h3 id="factory-method">Factory Method</h3>
+<p>Factory method is a method inside a class that returns a new object of the class own type, making it possible to create many ways of intantiating a class.</p>
+<ul>
+<li>Example of that can go wrong when not using Factories</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> CoordinateSystem{
+    Cartesian, Polar
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x, y;
+    
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> a, <span class="hljs-keyword">double</span> b, CoordinateSystem system = CoordinateSytem.Cartesian</span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (system)
+        {
+            <span class="hljs-keyword">case</span> CoordinateSystem.Cartesian:
+                x = a;
+                y = b;
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> CoordinateSystem.Polar:
+                x = a * Math.cos(b);
+                y = a * Math.sin(b);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfrangeException();
+        }
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
+    }
+
+    <span class="hljs-comment">// You cannot have two contructors with the same signature</span>
+    <span class="hljs-comment">// Even though it does make sense to create the points through theta and rho,</span>
+    <span class="hljs-comment">// And thus if you need this constructor to exist somehow you could do what</span>
+    <span class="hljs-comment">// Is being done above, however it creates many different problems</span>
+    <span class="hljs-comment">// Such as a and b being very generic and hard to know what it represents</span>
+    <span class="hljs-comment">// And if you create a XML comment it could happen that the person using it does not read it</span>
+    <span class="hljs-comment">// And it would still be not easy to read the code</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"> <span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>{
+        <span class="hljs-comment">// Some implementations</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>Now using Factory to avoid those problems</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment">// There are two benefits in using Factory over Constructors</span>
+<span class="hljs-comment">// The first one is that you can have multiple ways of creating the object, with the same signature and different names</span>
+<span class="hljs-comment">// for the parameters.</span>
+<span class="hljs-comment">// The other one is that you can give whicever name you want to the method that is creating the object</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-comment">// Factory Method Design Pattern</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewCartesianPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(x, y);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewPolarPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(rho * Math.cos(theta), rho * Math.sin(theta));
+    }
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x, y;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> point = Point.NewPolarPoint(<span class="hljs-number">1.0</span>, Math.PI / <span class="hljs-number">2.0</span>);
+    }
+}
+</div></code></pre>
+<h3 id="asynchronous-factory-method">Asynchronous Factory Method</h3>
+<p>Asynchronous invocation cannot happen everywhere, it can happen on a method, however it cannot happen on a contructor;
+So a good way to create objects asynchronously is using the Factory Method.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">async</span> Task&lt;Foo&gt; <span class="hljs-title">InitAsync</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">await</span> Task.Delay(<span class="hljs-number">1000</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>; 
+    }
+
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Task&lt;Foo&gt; <span class="hljs-title">CreateAsync</span>(<span class="hljs-params"></span>)</span>
+     {
+         <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> Foo();
+         <span class="hljs-keyword">return</span> result.InitAsync();
+     }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        Foo x = <span class="hljs-keyword">await</span> Foo.CreateAsync();
+    }
+}
+</div></code></pre>
+<h3 id="factory">Factory</h3>
+<p>It can be argued that the construction of an object should be a separate responsability from what the object actually does.
+So if you're using the Factory Design Patterns, to follow the Single Responsability Problem, it would be important to have another class for the  Factory.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> X, Y;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y</span>)</span>
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+<span class="hljs-comment">// The problem of having this outside class for instantiating a Point object</span>
+<span class="hljs-comment">// is that you have to make the Point constructor public, which can be somewhat confusing</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PointFactory</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewPolarPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(rho * Math.cos(theta), rho * Math.sin(theta));
+    }
+}
+</div></code></pre>
+<h4 id="inner-factory">Inner Factory</h4>
+<p>The Inner Factory tries to solve</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x, y;
+    
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span>
+    {
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewCartesianPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y</span>)</span>
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(x, y);
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-title">NewPolarPoint</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> rho, <span class="hljs-keyword">double</span> theta</span>)</span>
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(rho * Math.cos(theta), rho * Math.sin(theta));
+        }
+    }
+}
+</div></code></pre>
+<h3 id="abstract-factory">Abstract Factory</h3>
+<p>The Abstract Factory Design Pattern is used to give out Abstract objects instead of concrete objects;</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IHotDrink</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Consume</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Tea</span> : <span class="hljs-title">IHotDrink</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Consume</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">&quot;This tea is so amazing, I really, really, really, really, really, love it!);
+    }
+}
+
+internal class Coffee : IHotDrink
+{
+    public void Consume()
+    {
+        Console.Write(&quot;</span>I hate <span class="hljs-keyword">this</span> coffee, it tastes like your ugly face <span class="hljs-keyword">in</span> a sad winter day<span class="hljs-string">&quot;);
+    }
+}
+
+internal interface IHotDrinkFactory
+{
+    public IHotDrink Prepare(int amount);
+}
+
+internal class TeaFactory : IHotDrinkFactory
+{
+    public IHotDrink Prepare(int amount)
+    {
+        Console.WriteLine($&quot;</span>Put <span class="hljs-keyword">in</span> a tea bag, boild water, pour {amount} ml, <span class="hljs-keyword">add</span> lemon, enjoy!<span class="hljs-string">&quot;);
+        return new Tea();
+    }
+}
+
+internal class CoffeeFactory : IHotDrinkFactory
+{
+    public IHotDrink Prepare(int amount)
+    {
+        Console.WriteLine($&quot;</span>Grind some BEANS, boil WATER, pour {amount} ml of BLOOD, <span class="hljs-keyword">add</span> HATE and FEAR. Your coffee <span class="hljs-keyword">is</span> ready.<span class="hljs-string">&quot;);
+    }
+}
+
+public class HotDrinkMachine
+{
+    public enum AvailableDrink
+    {
+        Coffee, Tea
+    }
+
+    private Dictionary&lt;AvailableDrink, IHotDrinkFactory&gt; factories = new Dictionary&lt;AvailableDrink, IHotDrinkFactory&gt;();
+
+    public HotDrinkMachine()
+    {
+        foreach (AvailableDrink drink in Enum.GetValues(typeof(AvailableDrink)))
+        {
+            var factory = (IHotDrinkFactory)Activator.CreateInstance(
+                Type.GetType(&quot;</span>DesignPatterns.<span class="hljs-string">&quot; + Enum.GetName(typeof(AvailableDrink).drink) + &quot;</span>Factory));
+                factories.Add(drink, factory);
+            )
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IHotDrink <span class="hljs-title">MakeDrink</span>(<span class="hljs-params">Available drink, <span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> factories[drink].Prepare(amount);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> machine = <span class="hljs-keyword">new</span> HotDrinkMachine();
+        <span class="hljs-keyword">var</span> drink = machine.MakeDrink(HotDrinkMachine.AvailableDrink.Tea, <span class="hljs-number">100</span>);
+        drink.Consume() ;
+    }
+}
+</div></code></pre>
+<h4 id="abstract-factory-and-ocp">Abstract Factory and OCP</h4>
+<p>The problem with doing the Abstract Factory the way we did previously is that we are breaking the Open/Closed Principle by having a ENUM inside the HotDrinkMachine class. If we leave it as is, everytime we create a new HotDrink, we need to add a new enum there, which breaks the OCP.</p>
+<pre><code class="language-C#"><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HotDrinkMachine</span>(<span class="hljs-params"></span>)</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">Tuple</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">IHotDrinkFactory</span>&gt;&gt; factories</span> = <span class="hljs-keyword">new</span> List&lt;Tuple&lt;<span class="hljs-keyword">string</span>, IHotDrinkFactory&gt;&gt;();
+
+    <span class="hljs-keyword">foreach</span> (<span class="hljs-function"><span class="hljs-keyword">var</span> t <span class="hljs-keyword">in</span> <span class="hljs-title">typeof</span>(<span class="hljs-params">HotDrinkMachine</span>).Assembly.<span class="hljs-title">GetType</span>(<span class="hljs-params"></span>))</span>
+    {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span>(IHotDrinkFactory).IsAssignableFrom(t) &amp;&amp; !t.IsInterface)
+        {
+            factories.Add(Tuple.Create(
+                t.Name.Replace(<span class="hljs-string">&quot;Factory&quot;</span>, <span class="hljs-keyword">string</span>.Empty),
+                (IHotDrinkFactory)Activator.CreateInstance(t)
+            ));
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IHotDrink <span class="hljs-title">MakeDrink</span>(<span class="hljs-params"></span>)</span>
+    {
+        WriteLine(<span class="hljs-string">&quot;Available drinks: &quot;</span>)/
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> index = <span class="hljs-number">0</span>; index &lt; factories.Count; index++)
+        {
+            <span class="hljs-keyword">var</span> tuple = factories[index];
+            WriteLine(<span class="hljs-string">$&quot;<span class="hljs-subst">{index}</span>: <span class="hljs-subst">{tuple.Item1}</span>&quot;</span>);
+        }
+        <span class="hljs-comment">// Implement way of getting both the amount and the drink from the user</span>
+        <span class="hljs-keyword">return</span> factories[optionChosenByUser].Item2.Prepare(amountChosenByUser);
+    }
+}
+</div></code></pre>
+<h3 id="summary-1">Summary</h3>
+<ul>
+<li>A Factory Method is a static method that creates objects</li>
+<li>A Factory can take care of an object creation</li>
+<li>A Factory can be external or reside inside the object as a inner class</li>
+<li>Hierarchies of factories can be used to create related objects</li>
+</ul>
+<h2 id="prototype"><a href="https://refactoring.guru/design-patterns/prototype">Prototype</a></h2>
+<img alt="Prototype Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/prototype/prototype-2x.png"/>
+<ul>
+<li>
+<p>Motivations</p>
+<ul>
+<li>Complicated objects (e.g., cars) aren't designed from scratch
+<ul>
+<li>They reiterate existing designs</li>
+</ul>
+</li>
+<li>An Existing (Partially or fully constructed) design is a Prototype</li>
+<li>We make a copy (clone) the prototype and customize it
+<ul>
+<li>Requires 'deep copy' support</li>
+</ul>
+</li>
+<li>We make the cloning convenient (r.g., via Factory)</li>
+</ul>
+</li>
+<li>
+<p>Protype is a Partially or fully initialized object that you copy (clone) and make use of.</p>
+</li>
+</ul>
+<h3 id="the-problems-with-icloneable">The Problems with ICloneable</h3>
+<p>There are two types of Cloning</p>
+<ul>
+<li>Deep Clone
+<ul>
+<li>When you are deep cloning an object you are also creating clones of every reference type inside it, using their values to create the new object.</li>
+</ul>
+</li>
+<li>Shallow Clone
+<ul>
+<li>When you are shallow cloning, you are</li>
+</ul>
+</li>
+</ul>
+<p>The problem with ICloneable is it is a very old Interface which is very unspecific about what it actually does, is it supposed to be a shallow clone or a deep clone method? Since Microsoft itself uses the Interface as a way to Shallow Clone its objects, then you must suppose it is used to achieve that, however, the Prototype Pattern demands that you have Deep Clones of an object, and therefore  you should probably avoid using ICloneable when using the Prototype Pattern.
+Another problem with the ICloneable interface is that the Clone() method returns an object type, which demands you to cast the actual type whenever you are using it, or create a method that will call the Clone() method for you and then return the correct type, either way it adds more code and makes it harder to understand what is happening.</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> : <span class="hljs-title">ICloneable</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span>[] Names;
+    <span class="hljs-keyword">private</span> Address Address;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] names, Address address</span>)</span>
+    {
+        Names = names ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(names));
+        Address = address ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(names));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Names)}</span>: <span class="hljs-subst">{<span class="hljs-keyword">string</span>.Join(<span class="hljs-string">&quot; &quot;</span>, Names)}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(Address)}</span>: <span class="hljs-subst">{Address}</span>&quot;</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">object</span> <span class="hljs-title">Clone</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Shallow</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Person(Names, Address);
+
+        <span class="hljs-comment">// Deep</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Person(Names, (Address) Address.Clone()); 
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Address</span> : <span class="hljs-title">ICloneable</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> StreetName;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> HouseNumber;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Address</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> streetName, <span class="hljs-keyword">int</span> houseNumber</span>)</span>
+    {
+        StreetName = streetName ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(streetName));
+        HouseNumber = houseNumber;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(StreetName)}</span>: <span class="hljs-subst">{StreetName}</span>, <span class="hljs-subst">{<span class="hljs-keyword">nameof</span>(HouseNumber)}</span>: <span class="hljs-subst">{HouseNumber}</span>&quot;</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">object</span> <span class="hljs-title">Clone</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Shallow</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Address(StreetName, HouseNumber);
+    }
+}
+
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+[
+    <span class="hljs-title">static</span> <span class="hljs-title">void</span> <span class="hljs-title">Main</span>()
+    {
+        <span class="hljs-keyword">var</span> luke = <span class="hljs-keyword">new</span> Person(<span class="hljs-keyword">new</span> []{<span class="hljs-string">&quot;Luke&quot;</span>, <span class="hljs-string">&quot;Dias&quot;</span>},
+            <span class="hljs-keyword">new</span> Address(<span class="hljs-string">&quot;Figueiredo Magalhães&quot;</span>, <span class="hljs-number">123</span>));
+        
+        WriteLine(luke);
+    }
+]
+</div></code></pre>
+<h3 id="copy-constructors">Copy Constructors</h3>
+<h2 id="singleton"><a href="https://refactoring.guru/design-patterns/singleton">Singleton</a></h2>
+<img alt="Singleton Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/singleton/singleton-2x.png"/>
+<h1 id="structural-patterns">Structural Patterns</h1>
+<h2 id="adapter"><a href="https://refactoring.guru/design-patterns/adapter">Adapter</a></h2>
+<img alt="Adapter Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/adapter/adapter-en-2x.png"/>
+<h2 id="bridge"><a href="https://refactoring.guru/design-patterns/bridge">Bridge</a></h2>
+<img alt="Bridge Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/bridge/bridge-2x.png"/>
+<h2 id="composite"><a href="https://refactoring.guru/design-patterns/composite">Composite</a></h2>
+<img alt="Composite Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/composite/composite-2x.png"/>
+<h2 id="decorator"><a href="https://refactoring.guru/design-patterns/decorator">Decorator</a></h2>
+<img alt="Decorator Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/decorator/decorator-2x.png"/>
+<h2 id="façade"><a href="https://refactoring.guru/design-patterns/facade">Façade</a></h2>
+<img alt="Façade Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/facade/facade-2x.png"/>
+<h2 id="flyweight"><a href="https://refactoring.guru/design-patterns/flyweight">Flyweight</a></h2>
+<img alt="Flyweight Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/flyweight/flyweight-2x.png"/>
+<p>Flyweight Design Patterns was created to accomplish a simple goal: Space Optimization. And it does that by storing externally the data associated with similar objects.</p>
+<ul>
+<li>Motivations
+<ul>
+<li>Avoid redundancy when storing data</li>
+<li>Eg., MMORPG
+<ul>
+<li>Plenty of users with identical first/last names</li>
+<li>No sense in storing same first/last name over and over again</li>
+<li>Store a list of names and pointers to them</li>
+</ul>
+</li>
+<li>.NET performs string interning, so an identical string is stored only once.</li>
+<li>E.g. bold or italic text in the console
+<ul>
+<li>Dont want each character to have a formatting character</li>
+<li>Operate on ranges (e.g. line number, start/end position)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="repeating-user-names-example">Repeating User Names Example</h3>
+<p>Use JetBrains.DotMemoryUnit to see the memory allocation of the program</p>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">User</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> _fullName;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> fullName</span>)</span>
+    {
+        _fullName = fullName;
+    }
+}
+
+[<span class="hljs-meta">TestFixture</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+
+    <span class="hljs-comment">// By doing the test this way, each string is recreated even if there are equal strings in the code, which takes</span>
+    <span class="hljs-comment">//  a lot more space the more Users you add, so you should have a system to reference a string that is equal</span>
+    <span class="hljs-comment">//  to itself in case there&#x27;s an equal one </span>
+    [<span class="hljs-meta">Test</span>]
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TestUser</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> firstNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString());
+        <span class="hljs-keyword">var</span> lastNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString()); 
+        
+        <span class="hljs-keyword">var</span> users = <span class="hljs-keyword">new</span> List&lt;User&gt;();
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> firstName <span class="hljs-keyword">in</span> firstName)
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> lasName <span class="hljs-keyword">in</span> lastNames)
+                users.Add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">$&quot;<span class="hljs-subst">{firstName}</span> <span class="hljs-subst">{lastName}</span>&quot;</span>));
+
+        ForceGC();
+
+        dorMemory.Check(memory =&gt;
+         {
+             Console.WriteLine(memory.SizeInBytes);
+         });
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ForceGC</span>(<span class="hljs-params"></span>)</span>
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> <span class="hljs-title">RandomString</span>(<span class="hljs-params"></span>)</span>
+    {
+        Random rand = <span class="hljs-keyword">new</span> Random();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>(
+            Enumerable.Range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)
+            .Select(i =&gt; (<span class="hljs-keyword">char</span>) (<span class="hljs-string">&#x27;a&#x27;</span> + rand.Next(<span class="hljs-number">26</span>)))
+            .ToArray());
+    }
+}
+
+<span class="hljs-comment">// Doing the more optimized way</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">User2</span>
+{
+    <span class="hljs-keyword">static</span> List&lt;<span class="hljs-keyword">string</span>&gt; strings = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;)();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] names;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User2</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> fullName</span>)</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getOrAdd</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> s</span>)</span>
+        {
+            <span class="hljs-keyword">int</span> idx = <span class="hljs-keyword">string</span>.IndexOf(s);
+            <span class="hljs-keyword">if</span> (idx != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> idx;
+            <span class="hljs-keyword">else</span>
+            {
+                strings.Add(s);
+                <span class="hljs-keyword">return</span> strings.Count - <span class="hljs-number">1</span>;
+            }   
+        }
+        names = fullName.Split(<span class="hljs-string">&#x27; &#x27;</span>).Select(getOrAdd).ToArray();
+    }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> FullName =&gt; <span class="hljs-keyword">string</span>.Join(<span class="hljs-string">&quot; &quot;</span>, names.Select(i =&gt; strings[i]));
+}
+
+[<span class="hljs-meta">TestFixture</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program2</span>
+{
+    [<span class="hljs-meta">Test</span>]
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TestUser</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> firstNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString());
+        <span class="hljs-keyword">var</span> lastNames = Enumerable.Rangle(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>).Select(_ =&gt; RandomString()); 
+        
+        <span class="hljs-keyword">var</span> users = <span class="hljs-keyword">new</span> List&lt;User&gt;();
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> firstName <span class="hljs-keyword">in</span> firstName)
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> lasName <span class="hljs-keyword">in</span> lastNames)
+                users.Add(<span class="hljs-keyword">new</span> User2(<span class="hljs-string">$&quot;<span class="hljs-subst">{firstName}</span> <span class="hljs-subst">{lastName}</span>&quot;</span>));
+
+        ForceGC();
+
+        dorMemory.Check(memory =&gt;
+         {
+             Console.WriteLine(memory.SizeInBytes);
+         });
+    }
+}
+
+</div></code></pre>
+<h3 id="text-formatting-example">Text Formatting Example</h3>
+<p>This is an example shown in the Gang of Four book.
+It shows how editing text can be done with this memory saving technic.</p>
+<pre><code class="language-C#"><div><span class="hljs-comment">// The problem with this approach is that we are spending a lot of memory that is not actually necessary</span>
+<span class="hljs-comment">// And for each different formatting you would need even more memory</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FormattedText</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">string</span> _plainText;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span>[] _capitalize;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FormattedText</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> plainText</span>)</span>
+    {
+        _plainText = plainText;
+        _capitalize = <span class="hljs-keyword">new</span> <span class="hljs-keyword">bool</span>[_plainText.Length];
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Capitalize</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end</span>)</span>
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt;= end; i++)
+        {
+            capitalize[i] = <span class="hljs-literal">true</span>;
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; _plainText.Length; i++)
+        {
+            <span class="hljs-keyword">var</span> c = _plainText[i];
+            sb.Append(Capitlize[i] ? <span class="hljs-keyword">char</span>.ToUpper(c) : c);
+        }
+        <span class="hljs-keyword">return</span> sb.ToString();
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BetterFormattedText</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> _plainText;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">TextRange</span>&gt; formatting</span> = <span class="hljs-keyword">new</span> List&lt;TextRange&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BetterFormattedText</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> plainText</span>)</span>
+    {
+        _plainText = plainText;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TextRange <span class="hljs-title">GetRange</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> range = <span class="hljs-keyword">new</span> TextRange {Start = start, End = end};
+        formatting.Add(range);
+        <span class="hljs-keyword">return</span> range;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> index = <span class="hljs-number">0</span>; index &lt; _plainText.Length; index++)
+        {
+            <span class="hljs-keyword">var</span> c = _plainText[index];
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> range <span class="hljs-keyword">in</span> formatting)
+            {
+                <span class="hljs-keyword">if</span>(range.Covers(index))
+                    <span class="hljs-keyword">if</span> (range.Capitalize)
+                        c = <span class="hljs-keyword">char</span>.ToUpper(c);
+                sb.Append(c);
+            }
+        }
+        <span class="hljs-keyword">return</span> sb.ToString();
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TextRange</span>
+    {
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> Start, End;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span>, Capitalize, Bold, Italic;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Covers</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> position</span>)</span>
+        {
+            <span class="hljs-keyword">return</span> position &gt;= Start &amp;&amp; position&lt;= End;
+        }
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> ft = <span class="hljs-keyword">new</span> FormattedText(<span class="hljs-string">&quot;The left hand of dakness is light and the right hand of light is darkness&quot;</span>);
+        ft.Capitalize(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>);
+        Console.WriteLine(ft);
+
+        <span class="hljs-keyword">var</span> bft = <span class="hljs-keyword">new</span> BetterFormattedText(<span class="hljs-string">&quot;The left hand of dakness is light and the right hand of light is darkness&quot;</span>);
+        bft.GetRange(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>).Capitalize = <span class="hljs-literal">true</span>;
+    }
+}
+</div></code></pre>
+<h2 id="proxy"><a href="https://refactoring.guru/design-patterns/proxy">Proxy</a></h2>
+<img alt="Builder Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/proxy/proxy-2x.png"/>
+<h1 id="behavioral-patterns">Behavioral Patterns</h1>
+<h2 id="chain-of-responsability"><a href="https://refactoring.guru/design-patterns/chain-of-responsibility">Chain of Responsability</a></h2>
+<img alt="Chain of Responsability Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/chain-of-responsibility/chain-of-responsibility-2x.png"/>
+<h2 id="command"><a href="https://refactoring.guru/design-patterns/command">Command</a></h2>
+<img alt="Command Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/command/command-en-2x.png"/>
+<ul>
+<li>
+<p>Motivations</p>
+<ul>
+<li>Ordinary C# statements are perishable
+<ul>
+<li>Cannot undo a field/property assignment</li>
+<li>Cannot directly serialize a sequence of actions (calls)</li>
+</ul>
+</li>
+<li>Want an object that represents an operation
+<ul>
+<li>X should change its property Y yo Z</li>
+<li>X should do W()</li>
+</ul>
+</li>
+<li>Uses: GUI commands, multi-level undo/redo, macro recording, etc.</li>
+</ul>
+</li>
+<li>
+<p>An object which represents an instruction to perform a particular actiom. Contains all the information necessary for the action to be taken.</p>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BankAccount</span>
+{
+    <span class="hljs-keyword">private</span> _balance;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> overdraftLimit = <span class="hljs-number">-500</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Deposit</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        _balance += amount;
+        WriteLine(<span class="hljs-string">$&quot;Deposited $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Withdraw</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (_balance - amount &gt;= overdraftLimit)
+        {
+            _balance -= amount;
+            WriteLine(<span class="hljs-string">$&quot;Withdrew $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-keyword">bool</span> Success { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BanckAccountCommand</span> : <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-keyword">private</span> BankAccount _account;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Action
+    {
+        Deposit, Withdraw
+    }
+
+    <span class="hljs-keyword">private</span> Action _action;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> _amount;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span> _succeeded;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BankAccountCommand</span>(<span class="hljs-params">BankAccount account, Action action, <span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        _account = account ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(account));
+
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                _succeeded = account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (!_succeeded)
+            <span class="hljs-keyword">return</span>;
+
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> ba = <span class="hljs-keyword">new</span> BankAccount();
+        <span class="hljs-keyword">var</span> commands = <span class="hljs-keyword">new</span> List&lt;BankAccountCommand&gt;{
+            <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Deposit, <span class="hljs-number">100</span>),
+            <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Withdraw, <span class="hljs-number">50</span>)
+        };
+
+        
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> c <span class="hljs-keyword">in</span> commands)
+            c.Call();
+    
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> c <span class="hljs-keyword">in</span> Enumerable.Reverse(commands))
+            c.Undo();
+    }
+}
+</div></code></pre>
+<h3 id="composite-command">Composite Command</h3>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BankAccount</span>
+{
+    <span class="hljs-keyword">private</span> _balance;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> overdraftLimit = <span class="hljs-number">-500</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Deposit</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> ()
+        _balance += amount;
+        WriteLine(<span class="hljs-string">$&quot;Deposited $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Withdraw</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (_balance - amount &gt;= overdraftLimit)
+        {
+            _balance -= amount;
+            WriteLine(<span class="hljs-string">$&quot;Withdrew $<span class="hljs-subst">{amount}</span>, balance is now <span class="hljs-subst">{_balance}</span>&quot;</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-keyword">bool</span> Success { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CompositeBankAccount</span> : <span class="hljs-title">List</span>&lt;<span class="hljs-title">BankAccountCommand</span>&gt;, <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>
+    {
+        ForEach(cmd =&gt; cmd.Call());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-function"><span class="hljs-keyword">var</span> cmd <span class="hljs-title">in</span> (<span class="hljs-params">(IEnumerable&lt;BankAccountCommand&gt;</span>) <span class="hljs-keyword">this</span>). <span class="hljs-title">Reverse</span>(<span class="hljs-params"></span>))</span>
+        {
+            <span class="hljs-keyword">if</span> (cmd.Success) cmd.Undo();
+        }
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> Success
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.All(cmd =&gt; cmd.Success); )}
+        <span class="hljs-keyword">set</span> 
+        {
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> cmd <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>)
+                cmd.Success = <span class="hljs-keyword">value</span>;
+        }
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BanckAccountCommand</span> : <span class="hljs-title">ICommand</span>
+{
+    <span class="hljs-keyword">private</span> BankAccount _account;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> Action
+    {
+        Deposit, Withdraw
+    }
+
+    <span class="hljs-keyword">private</span> Action _action;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> _amount;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span> _succeeded;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BankAccountCommand</span>(<span class="hljs-params">BankAccount account, Action action, <span class="hljs-keyword">int</span> amount</span>)</span>
+    {
+        _account = account ?? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(paramName: <span class="hljs-keyword">nameof</span>(account));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Call</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                _succeeded = account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Undo</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">switch</span> (action)
+        {
+            <span class="hljs-keyword">case</span> Action.Deposit:
+                account.Withdraw(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> Action.Withdraw:
+                account.Deposit(amount);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentOutOfRangeException();
+        }
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">var</span> deposit = <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Deposit, <span class="hljs-number">100</span>);
+        <span class="hljs-keyword">var</span> withdraw = <span class="hljs-keyword">new</span> BankAccountCommand(ba, BankAccountCommand.Action.Withdraw, <span class="hljs-number">50</span>);
+        <span class="hljs-keyword">var</span> composite = <span class="hljs-keyword">new</span> CompositeBankAccountCommand(<span class="hljs-keyword">new</span>[]{deposit, withdraw});
+
+        composite.Call();
+        WriteLine(ba);
+
+        composite.Undo();
+        WriteLine(ba); 
+    }
+}
+</div></code></pre>
+<h3 id="summary-2">Summary</h3>
+<ul>
+<li>Encapsulate all details of an operation in separate object</li>
+<li>Define instruction for applying the command (either in the command itself, or elsewhere)</li>
+<li>Optionally define instructions for undoing the command</li>
+<li>Can create composite commands (a.k.a. macros)</li>
+</ul>
+<h2 id="interpreter">Interpreter</h2>
+<h2 id="iterator"><a href="https://refactoring.guru/design-patterns/iterator">Iterator</a></h2>
+<img alt="Iterator Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/iterator/iterator-en-2x.png"/>
+<h2 id="mediator"><a href="https://refactoring.guru/design-patterns/mediator">Mediator</a></h2>
+<img alt="Mediator Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/mediator/mediator-2x.png"/>
+<h2 id="memento"><a href="https://refactoring.guru/design-patterns/memento">Memento</a></h2>
+<img alt="Memento Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/memento/memento-en-2x.png"/>
+<h2 id="null-object">Null Object</h2>
+<h2 id="observer"><a href="https://refactoring.guru/design-patterns/observer">Observer</a></h2>
+<img alt="Observer Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/observer/observer-2x.png"/>
+<h2 id="state"><a href="https://refactoring.guru/design-patterns/state">State</a></h2>
+<img alt="State Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/state/state-en-2x.png"/>
+<h2 id="strategy"><a href="https://refactoring.guru/design-patterns/strategy">Strategy</a></h2>
+<img alt="Strategy Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/strategy/strategy-2x.png"/>
+<h2 id="template-method"><a href="https://refactoring.guru/design-patterns/template-method">Template Method</a></h2>
+<img alt="Template Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/template-method/template-method-2x.png"/>
+<h2 id="visitor"><a href="https://refactoring.guru/design-patterns/visitor">Visitor</a></h2>
+<img alt="Visitor Design Pattern" height="240px" src="https://refactoring.guru/images/patterns/content/visitor/visitor-2x.png"/>
+    </body>
+    </html>
