@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Study File for Domain Driven Design</title>
+        <style>
+/* From extension zhuangtongfa.material-theme */
+
+
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="study-file-for-domain-driven-design">Study File for Domain Driven Design</h1>
+<p><a href="index.html">Go back to index</a></p>
+<ul>
+<li><a href="#study-file-for-domain-driven-design">Study File for Domain Driven Design</a></li>
+<li><a href="#domain-driven-design"><strong>Domain Driven Design</strong></a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#why-domain-driven-design">Why Domain Driven Design?</a>
+<ul>
+<li><a href="#understanding-the-problem">Understanding the Problem</a></li>
+</ul>
+</li>
+<li><a href="#problem-space-and-solution-space">Problem space and solution space</a></li>
+<li><a href="#what-went-wrong-with-requirements">What went wrong with requirements</a></li>
+<li><a href="#dealing-with-complexity">Dealing with complexity</a></li>
+<li><a href="#types-of-complexity">Types of Complexity</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="domain-driven-design"><strong>Domain Driven Design</strong></h1>
+<h1 id="introduction">Introduction</h1>
+<h2 id="why-domain-driven-design">Why Domain Driven Design?</h2>
+<p>In 2015 the <a href="https://www.projectsmart.co.uk/white-papers/chaos-report.pdf">CHAOS report</a> made by the Standish Group was released showig that most IT projects either fail entirely or cost more and take longer than it was previously defined.
+Domain Driven Design is not a silver bullet to solve those problems, but the idea is to help even more avoiding falling on pitfalls that destroy our projects, and also help us understand more what we are developing and how to deliver the best product possible.</p>
+<h3 id="understanding-the-problem">Understanding the Problem</h3>
+<p>We as software developers rarely do code for no reason at all, we are usually seeking problems to solve and focus our attention on, otherwise there isn't much point in writing any software in the first place. Cognitive psychology defines the issue as a restriction between the current state and the desired state.</p>
+<h2 id="problem-space-and-solution-space">Problem space and solution space</h2>
+<p><strong>Search for the book Human Problem Solving</strong></p>
+<ul>
+<li>
+<p>Problem Space Theory -&gt; It states that humans solve problems by searching for a solution in the <em>problem</em> space. The problem space describes the initial and desired states.</p>
+</li>
+<li>
+<p>Problem Space -&gt; Describes the initial and desired states, as well as possible intermediate states. It can also contain specific contraints and rules that define the context of the problem.</p>
+</li>
+</ul>
+<p>In the Software industry, people operating in the problem space are usually customers and users.
+Each real problem demands a solution, and if we search properly in the problem space, we can outline which steps we need to take to move from the initial state to the desired state. This outline and all the details about the solution form a <em>solution</em> space.</p>
+<ul>
+<li>Although problems appear to be simple at a first glance, additional constraints, which are called non-functional requirements, or, operational requirement, can make the problem much more complicated than it looked at a first glance.</li>
+</ul>
+<p>Jumping to a solution is very easy, and since most of us have a rather rich experience of solving everyday problems, we can find solutions for many issues almost immediately. However, as <a href="https://hbr.org/2013/09/when-youre-innovating-resist-l"><em>this</em></a> study suggests, thinking about solutions prevents our brain from thinking about the problem. Instead, we start going deeper into the solution that first came to out mind, adding more levels of detail and trying to make it the most ideal solution for a given problem.</p>
+<h2 id="what-went-wrong-with-requirements">What went wrong with requirements</h2>
+<p>When you work with requirements, the developers rarely have direct contact with whoever wants to solve a problem. More likely, some dedicated people (such as the Product Manager, or business analyst, or requirement analyst) talk to customers and generalize the outcomes of these conversations in the form of <strong><em>functional requirements</em></strong>.
+Requirements can have different forms, from large documents called <strong>requirements specification</strong> to more agile means such as <strong>user stories</strong>.</p>
+<p>Look at this example:</p>
+<pre><code>            &quot;Every day, the system shall generate, for each hotel, a list of guests expected to chekc in and check out on that day&quot;
+</code></pre>
+<p>The above statement is only describing the solution.We can't possibly understand what's the problem the user is trying to solve, or what he is trying to do. As was said before, there might other, undiscovered, functional requirements, further refinements to be specified. However, a description of the problem is almost never included on the functional requirements.</p>
+<p>Let's see an example of a typical user story:</p>
+<pre><code>            &quot;As a warehouse manager, I need to be able to print a stock-level report so that I can order items when they are out of stock&quot;
+</code></pre>
+<p>In this case, we have an insight into what out user wants. However, this user story already dictates what the developers need to do. It is describing the <em>solution</em>. The real problem is probably that the customer needs a more efficient procurement process, so they never run out of stock. Or, they need an advanced purchase forecasting system, so they can improve throughput  without stockpiling additional inventory in their warehouse.</p>
+<ul>
+<li><strong>Requirements are not a waste of time!</strong>
+<ul>
+<li>The are many excellent analysts out there who produce high-quality requirements specifications. However, it is <strong>vital</strong> to understand that these requirements almost always represent the <strong>understanding of the actual problem from the point of view of the person who wrote them</strong>. A misconception that spending more and more time and money on writing higher-quality requirements prevails in the industry.</li>
+</ul>
+</li>
+<li><strong>However Lean and Agile methodologies embrace more direct communication between developers and end users</strong>
+<ul>
+<li>Understanding the problem by all stakeholders, from end users to developers and testers, finding solutions together, eliminating assumptions, building prototypes for end user to evaluate - all these things are being adopted by successful teams, and as we will se later in the book, they are also closely related to DDD.</li>
+</ul>
+</li>
+</ul>
+<h2 id="dealing-with-complexity">Dealing with complexity</h2>
+<p>In software, the idea of <strong>complexity</strong> is not much different from the real world, which make sense, since most softwares are written to deal with real-world problems. Those problems might sound simple but be instrinsically complex. Without a doubt, the problem space complexity will be reflected in the software that tries to solve such a problem. Realizing what <strong>kind of complexity</strong> we are dealing with when creating software thus becomes very important.</p>
+<h2 id="types-of-complexity">Types of Complexity</h2>
+<p><strong>Search for the article No Silver Bullet –Essence and Accident in Software Engineering</strong></p>
+<ul>
+<li>
+<h2 id="essential-complexity">Essential Complexity</h2>
+</li>
+<li>
+<h2 id="accidental-complexity">Accidental Complexity</h2>
+</li>
+</ul>
+
+    </body>
+    </html>
